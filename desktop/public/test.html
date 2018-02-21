@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style>
+      body {margin: 0}
+      .containment {position: relative; width: 100%; height: 200vh; overflow-x: hidden}
+      .left {position: absolute; width: 100vw; height: 100%; top: 0; left: -100vw; background-color: blue; transition-property: left; transition-duration: .2s; transition-delay: 0}
+      .left.go {left: 0}
+      .center {position: absolute; width: 100vw; height: 100%; top: 0; left: 0; background-color: green; transition-property: left; transition-duration: .2s; transition-delay: 0}
+      .center.goRight {left: 100vw}
+      .center.goLeft {left: -100vw}
+      .right {position: absolute; width: 100vw; height: 100%; top: 0; left: 100vw; background-color: red; transition-property: left; transition-duration: .2s; transition-delay: 0}
+      .right.go {left: 0}
+      .nav {position: fixed; top: 80px}
+    </style>
+  </head>
+  <body>
+    <div id="top" class="containment">
+      <div class="left" id="left"></div>
+      <div class="center" id="center"></div>
+      <div class="right" id="right"></div>
+    </div>
+    <div class="nav">
+      <a href="#top"><button id="left-go">Go left</button></a>
+      <a href="#top"><button id="center-go">Go center</button></a>
+      <a href="#top"><button id="right-go">Go right</button></a>
+    </div>
+    <script type="text/javascript">
+      function takeMeLeft(e) {
+        var center = document.getElementById('center');
+        var left = document.getElementById('left');
+        var right = document.getElementById('right');
+        center.className = 'center goRight';
+        left.className = 'left go';
+        right.className = 'right';
+      }
+      function takeMeCenter(e) {
+        var center = document.getElementById('center');
+        var left = document.getElementById('left');
+        var right = document.getElementById('right');
+        center.className = 'center';
+        left.className = 'left';
+        right.className = 'right';
+      }
+      function takeMeRight(e) {
+        var center = document.getElementById('center');
+        var right = document.getElementById('right');
+        var left = document.getElementById('left');
+        center.className = 'center goLeft';
+        right.className = 'right go';
+        left.className = 'left';
+      }
+      var leftGo = document.getElementById('left-go');
+      leftGo.onclick = takeMeLeft;
+      var centerGo = document.getElementById('center-go');
+      centerGo.onclick = takeMeCenter;
+      var rightGo = document.getElementById('right-go');
+      rightGo.onclick = takeMeRight;
+    </script>
+  </body>
+</html>

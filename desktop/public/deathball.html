@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style>
+      body {margin: 0}
+      .containment {position: relative; width: 100%; height: 100vh; overflow: hidden}
+      .ball {position: absolute; top: -80px; transition-duration: 2s; transition-property: top; transition-timing-function: ease-in; border-radius: 50%}
+      .ball.drop {top: 100vh}
+    </style>
+  </head>
+  <body>
+    <div id="top" class="containment">
+      <!-- <div id="ball" class="ball"></div> -->
+    </div>
+    <script type="text/javascript">
+      function setUp() {
+        let top = document.getElementById('top')
+        for (var i = 0; i < 1000; i++) {
+          let newBall = document.createElement('div')
+          newBall.className = 'ball'
+          newBall.style.transitionDelay = `${Math.floor(Math.random() * 1000) * .0025}s`
+          newBall.style.left = `${Math.floor(Math.random() * 101)}%`
+          newBall.style.transform = 'translateX(-50%)'
+          let radius = Math.floor(Math.random() * 6) * 10 + 20
+          newBall.style.width = `${radius}px`
+          newBall.style.height = `${radius}px`
+          let colors = ['red', 'green', 'blue']
+          newBall.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]
+          top.appendChild(newBall)
+        }
+      }
+      setUp()
+      window.onload = function() {
+        let balls = document.getElementsByClassName('ball')
+        Array.from(balls).forEach(ball => {ball.className += ' drop'})
+      }
+    </script>
+  </body>
+</html>

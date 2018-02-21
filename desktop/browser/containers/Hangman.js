@@ -15,7 +15,6 @@ export default class Hangman extends React.Component {
     })
 
     this.guessLetter = this.guessLetter.bind(this)
-    this.reset = this.reset.bind(this)
   }
 
   guessLetter(e) {

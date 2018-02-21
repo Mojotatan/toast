@@ -28,6 +28,14 @@ db.sync({force: true})
       res.send(rng(dictionary))
     })
 
+    .get('/balls', (req, res) => {
+      res.sendFile(path.resolve(__dirname, './desktop/public/deathball.html'))
+    })
+
+    .get('/test', (req, res) => {
+      res.sendFile(path.resolve(__dirname, './desktop/public/test.html'))
+    })
+
     .get('*', (req, res) => {
       res.sendFile(path.resolve(__dirname, './desktop/public/index.html'))
     })
