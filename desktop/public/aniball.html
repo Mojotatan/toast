@@ -3,64 +3,131 @@
   <head>
     <style>
       body {margin: 0}
-      .containment {position: relative; width: 100%; height: 100vh; overflow: hidden}
+      .filler {
+        width: 100%;
+        font-size: 70px;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center
+      }
+      .filler > div {
+        width: 100%;
+        height: 400px;
+        margin-bottom: 50px
+      }
 
-      .ball {position: absolute; top: -40px; transition-duration: 2s; transition-property: top, left; border-radius: 50%}
-      .blue {background-color: blue; transition-duration: 2s; transition-timing-function: ease-in-out}
-      .red {background-color: red; transition-duration: 2s; transition-timing-function: ease-in-out}
+      .containment {position: relative; width: 1200px; height: 800px; margin-left: auto; margin-right: auto; border: 3px solid black; overflow: hidden}
+
+      .ball {position: absolute; top: -40px; border-radius: 50%; animation-duration: 2s; animation-timing-function: ease-in; animation-iteration-count: 1}
+      .blue {background-color: white}
+      .red {background-color: red; transform: translateY(-50%); transition-property: top, left; transition-duration: 2s; transition-timing-function: ease-in-out;}
       @keyframes blue-drop {
-        
+        0% {top: 0}
+        50% {background-color: blue}
+        /* 50% {opacity: 1}
+        90% {opacity: 0} */
+        100% {top: calc(100% - 40px); background-color: white}
       }
-      @keyframes red-drop {
-
-      }
-      .ball.blue.drop {top: calc(100% + 40px)}
+      /* @keyframes red-drop {
+        0% {top: -40px}
+        100% {top: 50%}
+      } */
+      .ball.blue.drop {animation-name: blue-drop;}
       .ball.red.drop {top: 50%}
-      .ball.slide {left: 46% !important}
+      .ball.slide {left: 44% !important; top: 50%; transition-delay: 0s !important}
 
-      .ghost-text {position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%); transition-delay: .5s; transition-duration: 1s; transition-property: opacity; opacity: 0; font-size: 60px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right; width: 20%; color: red}
+      .ghost-text {position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%); transition-delay: 0s; transition-duration: 1s; transition-property: opacity; opacity: 0; font-size: 60px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right; width: 20%; color: red}
       .ghost-text.summon {opacity: 1}
     </style>
   </head>
   <body>
+    <div class="filler">
+      <div>I'm performance testing right now</div>
+      <div>Scroll down to trigger the animation</div>
+      <div></div>
+    </div>
     <div id="top" class="containment">
       <div class="ghost-text">Durdle Durr</div>
     </div>
+    <div class="filler"><div></div></div>
     <script type="text/javascript">
       function setUp() {
         let top = document.getElementById('top')
-        for (var i = 0; i < 1000; i++) {
+        const balls = 1000
+        let delayArray = []
+        // for (let i = 0; i < balls; i++) {
+        //   delayArray.push(Math.floor(Math.random() * 1000) * 2.5)
+        // }
+        // delayArray.sort()
+        for (let i = 0; i < balls; i++) {
           let newBall = document.createElement('div')
           newBall.className = (i % 10 === 0) ? 'ball red' : 'ball blue'
           // newBall.className = 'ball blue'
-          newBall.style.transitionDelay = `${Math.floor(Math.random() * 1000) * 2.5}ms`
-          newBall.style.left = `${Math.floor(Math.random() * 101)}%`
-          newBall.style.transform = 'translate(-50%, -50%)'
-          let radius = Math.floor(Math.random() * 6) * 5 + 10
-          newBall.style.width = `${radius}px`
-          newBall.style.height = `${radius}px`
+          let delay = Math.floor(Math.random() * 1000) * 2.5
+          newBall.style.animationDelay = `${delay}ms`
+          newBall.style.transitionDelay = `${delay}ms`
+          let diameter = Math.floor(Math.random() * 6) * 5 + 10
+          newBall.style.width = `${diameter}px`
+          newBall.style.height = `${diameter}px`
+          // newBall.style.left = `calc(${Math.floor(Math.random() * 101)}% - ${diameter / 2}px)`
+          newBall.style.left = `${Math.floor(Math.random() * (1200 - diameter))}px`
           top.appendChild(newBall)
         }
       }
       setUp()
-      window.onload = function() {
-        let balls = document.getElementsByClassName('ball')
-        Array.from(balls).forEach(ball => {
-          ball.className += ' drop'
-        })
-        setTimeout(function() {
-          let balls = document.getElementsByClassName('red')
-          Array.from(balls).forEach(ball => {
-            ball.className += ' slide'
-          })
-          setTimeout(function() {
-            let ghosts = document.getElementsByClassName('ghost-text')
-            Array.from(ghosts).forEach(ghost => {
-              ghost.className += ' summon'
-            })
-          }, 5000)
-        }, 4000)
+      const getYOffset = element => {
+        let y = element.offsetTop
+        if (element.offsetParent) y += getYOffset(element.offsetParent)
+        return y
       }
+      var scrollTarget = getYOffset(document.getElementById('top')) - 800
+      var didScroll = false
+      window.onscroll = function() {
+        didScroll = true
+      }
+      var checkYOffset = setInterval(function() {
+        if (didScroll) {
+          didScroll = false
+          console.log('happy scroll')
+          if (window.scrollY >= scrollTarget) {
+            console.log('trigger me timbers')
+            let balls = document.getElementsByClassName('ball')
+            Array.from(balls).forEach(ball => {
+              ball.className += ' drop'
+            })
+            setTimeout(function() {
+              let balls = document.getElementsByClassName('red')
+              Array.from(balls).forEach(ball => {
+                ball.className = 'ball red slide'
+              })
+              setTimeout(function() {
+                let ghosts = document.getElementsByClassName('ghost-text')
+                Array.from(ghosts).forEach(ghost => {
+                  ghost.className += ' summon'
+                })
+              }, 3000)
+            }, 4000)
+            clearInterval(checkYOffset)
+          }
+        }
+      }, 100)
+      // window.onload = function() {
+      //   let balls = document.getElementsByClassName('ball')
+      //   Array.from(balls).forEach(ball => {
+      //     ball.className += ' drop'
+      //   })
+      //   setTimeout(function() {
+      //     let balls = document.getElementsByClassName('red')
+      //     Array.from(balls).forEach(ball => {
+      //       ball.className = 'ball red slide'
+      //     })
+      //     setTimeout(function() {
+      //       let ghosts = document.getElementsByClassName('ghost-text')
+      //       Array.from(ghosts).forEach(ghost => {
+      //         ghost.className += ' summon'
+      //       })
+      //     }, 3000)
+      //   }, 4000)
+      // }
     </script>
   </body>
 </html>
