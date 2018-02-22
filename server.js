@@ -32,6 +32,10 @@ db.sync({force: true})
       res.sendFile(path.resolve(__dirname, './desktop/public/deathball.html'))
     })
 
+    .get('/ballsamic', (req, res) => {
+      res.sendFile(path.resolve(__dirname, './desktop/public/aniball.html'))
+    })
+
     .get('/test', (req, res) => {
       res.sendFile(path.resolve(__dirname, './desktop/public/test.html'))
     })

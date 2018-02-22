@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style>
+      body {margin: 0}
+      .containment {position: relative; width: 100%; height: 100vh; overflow: hidden}
+
+      .ball {position: absolute; top: -40px; transition-duration: 2s; transition-property: top, left; border-radius: 50%}
+      .blue {background-color: blue; transition-duration: 2s; transition-timing-function: ease-in-out}
+      .red {background-color: red; transition-duration: 2s; transition-timing-function: ease-in-out}
+      @keyframes blue-drop {
+        
+      }
+      @keyframes red-drop {
+
+      }
+      .ball.blue.drop {top: calc(100% + 40px)}
+      .ball.red.drop {top: 50%}
+      .ball.slide {left: 46% !important}
+
+      .ghost-text {position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%); transition-delay: .5s; transition-duration: 1s; transition-property: opacity; opacity: 0; font-size: 60px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right; width: 20%; color: red}
+      .ghost-text.summon {opacity: 1}
+    </style>
+  </head>
+  <body>
+    <div id="top" class="containment">
+      <div class="ghost-text">Durdle Durr</div>
+    </div>
+    <script type="text/javascript">
+      function setUp() {
+        let top = document.getElementById('top')
+        for (var i = 0; i < 1000; i++) {
+          let newBall = document.createElement('div')
+          newBall.className = (i % 10 === 0) ? 'ball red' : 'ball blue'
+          // newBall.className = 'ball blue'
+          newBall.style.transitionDelay = `${Math.floor(Math.random() * 1000) * 2.5}ms`
+          newBall.style.left = `${Math.floor(Math.random() * 101)}%`
+          newBall.style.transform = 'translate(-50%, -50%)'
+          let radius = Math.floor(Math.random() * 6) * 5 + 10
+          newBall.style.width = `${radius}px`
+          newBall.style.height = `${radius}px`
+          top.appendChild(newBall)
+        }
+      }
+      setUp()
+      window.onload = function() {
+        let balls = document.getElementsByClassName('ball')
+        Array.from(balls).forEach(ball => {
+          ball.className += ' drop'
+        })
+        setTimeout(function() {
+          let balls = document.getElementsByClassName('red')
+          Array.from(balls).forEach(ball => {
+            ball.className += ' slide'
+          })
+          setTimeout(function() {
+            let ghosts = document.getElementsByClassName('ghost-text')
+            Array.from(ghosts).forEach(ghost => {
+              ghost.className += ' summon'
+            })
+          }, 5000)
+        }, 4000)
+      }
+    </script>
+  </body>
+</html>
