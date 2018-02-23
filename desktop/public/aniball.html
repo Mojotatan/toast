@@ -15,11 +15,11 @@
         margin-bottom: 50px
       }
 
-      .containment {position: relative; width: 1200px; height: 800px; margin-left: auto; margin-right: auto; border: 3px solid black; overflow: hidden}
+      .containment {position: relative; width: 1200px; height: 800px; margin-left: auto; margin-right: auto; /*border: 3px solid black;*/ overflow: hidden}
 
-      .ball {position: absolute; top: -40px; border-radius: 50%; animation-duration: 2s; animation-timing-function: ease-in; animation-iteration-count: 1}
-      .blue {background-color: white}
-      .red {background-color: red; transform: translateY(-50%); transition-property: top, left; transition-duration: 2s; transition-timing-function: ease-in-out;}
+      .ball {position: absolute; top: -40px; border-radius: 50%}
+      .blue {background-color: white; animation-duration: 2s; animation-timing-function: ease-in;}
+      .red {background-color: red; transform: translateY(-50%); animation-duration: 2s; animation-timing-function: ease-in-out}
       @keyframes blue-drop {
         0% {top: 0}
         50% {background-color: blue}
@@ -27,13 +27,20 @@
         90% {opacity: 0} */
         100% {top: calc(100% - 40px); background-color: white}
       }
-      /* @keyframes red-drop {
-        0% {top: -40px}
-        100% {top: 50%}
-      } */
+      @keyframes red-drop {
+        0% {top: 0; background-color: white}
+        100% {top: 50%; background-color: red;}
+      }
+      @keyframes red-slide {
+        0% {top: 50%}
+        100% {top: 50%; left: 44%}
+      }
+      @keyframes red-exist {
+        0%, 100% {top: 50%; left: 44%}
+      }
       .ball.blue.drop {animation-name: blue-drop;}
-      .ball.red.drop {top: 50%}
-      .ball.slide {left: 44% !important; top: 50%; transition-delay: 0s !important}
+      .ball.red.drop {animation-name: red-drop, red-slide, red-exist; animation-iteration-count: 1, 1, infinite}
+      .ball.slide {top: 50%}
 
       .ghost-text {position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%); transition-delay: 0s; transition-duration: 1s; transition-property: opacity; opacity: 0; font-size: 60px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right; width: 20%; color: red}
       .ghost-text.summon {opacity: 1}
@@ -61,10 +68,10 @@
         for (let i = 0; i < balls; i++) {
           let newBall = document.createElement('div')
           newBall.className = (i % 10 === 0) ? 'ball red' : 'ball blue'
-          // newBall.className = 'ball blue'
-          let delay = Math.floor(Math.random() * 1000) * 2.5
-          newBall.style.animationDelay = `${delay}ms`
-          newBall.style.transitionDelay = `${delay}ms`
+          // newBall.className = 'ball red'
+          let delay = Math.floor(Math.random() * 2000)
+          newBall.style.animationDelay = `${delay}ms, 4s, 6s`
+          // newBall.style.transitionDelay = `${delay}ms`
           let diameter = Math.floor(Math.random() * 6) * 5 + 10
           newBall.style.width = `${diameter}px`
           newBall.style.height = `${diameter}px`
@@ -97,15 +104,15 @@
             setTimeout(function() {
               let balls = document.getElementsByClassName('red')
               Array.from(balls).forEach(ball => {
-                ball.className = 'ball red slide'
+                ball.className += ' slide'
               })
               setTimeout(function() {
                 let ghosts = document.getElementsByClassName('ghost-text')
                 Array.from(ghosts).forEach(ghost => {
                   ghost.className += ' summon'
                 })
-              }, 3000)
-            }, 4000)
+              }, 5000)
+            }, 2000)
             clearInterval(checkYOffset)
           }
         }
