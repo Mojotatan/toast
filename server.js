@@ -13,6 +13,35 @@ const app = express()
 db.sync({force: true})
 .then(() => {
   const server = app.listen(port, () => {console.log(`Listening on port ${port}...`)})
+  const io = require('socket.io')(server)
+
+  let connections = {black: null, red: null}
+
+  io.on('connection', (socket) => {
+    console.log('new connection on', socket.id)
+    if (!connections.red) {
+      connections.red = socket.id
+      socket.emit('player assignment', 'red')
+    } else if (!connections.black) {
+      connections.black = socket.id
+      socket.emit('player assignment', 'black')
+    }
+    console.log(connections)
+
+    socket.on('move', x => {
+      socket.broadcast.emit('move', x)
+    })
+
+    socket.on('chat', message => {
+      io.emit('chat', message)
+    })
+
+    socket.on('disconnect', () => {
+      console.log('user left', socket.id)
+      if (connections.red === socket.id) connections.red = null
+      else if (connections.black === socket.id) connections.black = null
+    })
+  })
 
   app
     .use(morgan('tiny'))
