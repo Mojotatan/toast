@@ -57,6 +57,14 @@ db.sync({force: true})
       res.send(rng(dictionary))
     })
 
+    .get('/decksift', (req, res) => {
+      // const fs = require('fs')
+      // let bob = fs.readFileSync('./desktop/public/sampledeck.txt', {encoding: 'utf8'})
+      // console.log(bob.split('\n'))
+      // res.send(bob)
+      res.sendFile(path.resolve(__dirname, './desktop/public/decksift.html'))
+    })
+
     .get('/balls', (req, res) => {
       res.sendFile(path.resolve(__dirname, './desktop/public/deathball.html'))
     })
@@ -65,12 +73,24 @@ db.sync({force: true})
       res.sendFile(path.resolve(__dirname, './desktop/public/aniball.html'))
     })
 
+    .get('/gsap', (req, res) => {
+      res.sendFile(path.resolve(__dirname, './desktop/public/gsap-demo.html'))
+    })
+
     .get('/hatred', (req, res) => {
       res.sendFile(path.resolve(__dirname, './desktop/public/antiresponsive.html'))
     })
 
     .get('/test', (req, res) => {
       res.sendFile(path.resolve(__dirname, './desktop/public/test.html'))
+    })
+
+    .get('/testquad', (req, res) => {
+      res.sendFile(path.resolve(__dirname, './desktop/public/testquad.html'))
+    })
+
+    .get('/mask', (req, res) => {
+      res.sendFile(path.resolve(__dirname, './desktop/public/mask.html'))
     })
 
     .get('*', (req, res) => {

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <style>
+      #output > tr > td + td {
+        padding-left: 20px;
+        padding-right: 20px
+      }
+    </style>
+  </head>
+  <body>
+      <h2>Choose some decks or whatever</h2>
+      <form id="form">
+        <input id="input" type="file" multiple />
+        <button type="submit">go</button>
+      </form>
+      <!-- <div id="output"></div> -->
+      <table>
+        <tbody id="output">
+          <tr>
+            <td>Card</td>
+            <td>#</td>
+            <td>Decks</td>
+          </tr>
+        </tbody>
+      </table>
+    <script>
+      document.getElementById('form').onsubmit = e => {
+        e.preventDefault()
+        let files = document.getElementById('input').files
+        let allCards = {}
+        let queue = files.length
+        Array.from(files).forEach(file => {
+          let name = (file.name.slice(-4) === '.txt') ? file.name.slice(0, -4) : file.name
+          let reader = new FileReader()
+          reader.onload = () => {
+            reader.result.split('\n').forEach(line => {
+              let card = line.slice(line.search(' ') + 1)
+              if (!allCards[card]) allCards[card] = []
+              allCards[card].push(name)
+            })
+            queue--
+            if (queue === 0) {
+              const basics = ['Plains', 'Island', 'Swamp', 'Mountain', 'Forest']
+              let matches = Object.keys(allCards).filter(card => (
+                allCards[card].length > 1 && !basics.includes(card))
+              )
+              matches.sort((a, b) => {
+                let aLen = allCards[a].length
+                let bLen = allCards[b].length
+                if (aLen > bLen) return -1
+                else if (aLen < bLen) return 1
+                else if (a > b) return 1
+                else if (a < b) return -1
+                else return 0
+              })
+              let tbody = document.getElementById('output')
+              matches.forEach(card => {
+                // console.log(`${card} | ${allCards[card].length} | ${allCards[card].join(', ')}`)
+                let tr = document.createElement('tr')
+                let name = document.createElement('td')
+                name.innerText = card
+                tr.appendChild(name)
+                let num = document.createElement('td')
+                num.innerText = allCards[card].length
+                tr.appendChild(num)
+                let dlist = document.createElement('td')
+                dlist.innerText = allCards[card].join(', ')
+                tr.appendChild(dlist)
+                tbody.appendChild(tr)
+              })
+            }
+          }
+          reader.readAsText(file)
+        })
+      }
+    </script>
+  </body>
+</html>

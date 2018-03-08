@@ -11,7 +11,12 @@
       .center.goLeft {left: -100vw}
       .right {position: absolute; width: 100vw; height: 100%; top: 0; left: 100vw; background-color: red; transition-property: left; transition-duration: .2s; transition-delay: 0}
       .right.go {left: 0}
-      .nav {position: fixed; top: 80px}
+      .nav {position: fixed; top: 80px; left: 50%; transform: translateX(-50%)}
+      .nav button {height: 40px}
+      .nav #center-go {
+        margin-left: 20px;
+        margin-right: 20px
+      }
     </style>
   </head>
   <body>
@@ -56,6 +61,12 @@
       centerGo.onclick = takeMeCenter;
       var rightGo = document.getElementById('right-go');
       rightGo.onclick = takeMeRight;
+
+      leftGo.onmouseover = e => leftGo.click()
+      // leftGo.onmouseout = e => centerGo.click()
+      centerGo.onmouseover = e => centerGo.click()
+      rightGo.onmouseover = e => rightGo.click()
+      // rightGo.onmouseout = e => centerGo.click()
     </script>
   </body>
 </html>

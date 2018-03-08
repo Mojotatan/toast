@@ -39,7 +39,7 @@ export default class Hangman extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.boody}>
         <h2>Hang em High</h2>
         <div className={styles.gallows}>
           {this.state.guesses.filter(letter => (!this.state.word.includes(letter))).map((guess, index) => (
