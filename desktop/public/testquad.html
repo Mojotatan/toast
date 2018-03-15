@@ -1,255 +1,69 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <style>
-      body {margin: 0}
-      .containment {position: relative; width: 100%; height: 100vh; overflow: hidden}
-      .top {position: absolute; width: 100vw; height: 100%; top: -100%; left: 0; transition-property: top; transition-duration: .2s; transition-delay: 0}
-      .top.ready {top: -50%}
-      .top.go {top: 0}
-      .left {position: absolute; width: 100vw; height: 100%; top: 0; left: -100vw; transition-property: left; transition-duration: .2s; transition-delay: 0}
-      .left.ready {left: -50vw}
-      .left.go {left: 0}
-      .bottom {position: absolute; width: 100vw; height: 100%; top: 100%; left: 0; transition-property: top; transition-duration: .2s; transition-delay: 0}
-      .bottom.ready {top: 50%}
-      .bottom.go {top: 0}
-      .right {position: absolute; width: 100vw; height: 100%; top: 0; left: 100vw; transition-property: left; transition-duration: .2s; transition-delay: 0}
-      .right.ready {left: 50vw}
-      .right.go {left: 0}
-      
-
-      #top-go, #left-go, #right-go, #bottom-go {
-        cursor: pointer;
-        /* color: #D53036; */
-        /* background-color: blue; */
-        /* border: none; */
-        font-size: 20px;
-        font-weight: bold;
-        text-align: center
-      }
-      .containment img {
-        position: absolute;
-        max-width: calc(100% - 100px);
-        max-height: calc(100% - 100px);
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%)
-      }
-      #top-go {
-        z-index: 1;
-        position: fixed;
-        height: 50px;
-        top: 0;
-        left: 50px;
-        width: calc(100% - 100px)
-      }
-      #top-go > div {
-        line-height: 50px
-      }
-      #top-go.go > div::before {
-        content: ' ';
-        background-color: #d53036;
-        height: 4px;
-        width: 80px;
-        margin-left: -14px;
-        margin-top: 22px;
-        position: absolute;
-        z-index: -1
-      }
-      #left-go {
-        z-index: 1;
-        position: fixed;
-        width: 50px;
-        left: 0;
-        top: 50px;
-        height: calc(100% - 100px)
-      }
-      #left-go > div {
-        width: 20px;
-        height: 20px;
-        background-color: #d53036;
-        -moz-border-radius: 50%;
-        -webkit-border-radius: 50%;
-        border-radius: 50%;
-        border: 2px solid #d53036;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%)
-      }
-      #left-go.go > div {
-        background-color: white; /*shoutout to ie*/
-        background-color: initial
-      }
-      #right-go {
-        z-index: 1;
-        position: fixed;
-        width: 50px;
-        right: 0;
-        top: 50px;
-        height: calc(100% - 100px)
-      }
-      #right-go > div {
-        line-height: 50px;
-        transform: rotate(-90deg);
-        width: 200px;
-        padding-bottom: 150px;
-        position: absolute;
-        top: calc(50% - 100px)
-      }
-      #right-go.go > div::before {
-        content: ' ';
-        background-color: #d53036;
-        height: 4px;
-        width: 130px;
-        margin-left: -14px;
-        margin-top: 22px;
-        position: absolute;
-        z-index: -1
-      }
-      #bottom-go {
-        z-index: 1;
-        position: fixed;
-        height: 50px;
-        bottom: 0;
-        width: calc(100% - 100px);
-        left: 50px;
-      }
-      #bottom-go > div {
-        line-height: 50px
-      }
-      #bottom-go.go > div::before {
-        content: ' ';
-        background-color: #d53036;
-        height: 4px;
-        width: 154px;
-        margin-left: -14px;
-        margin-top: 22px;
-        position: absolute;
-        z-index: -1
-      }
-    </style>
+    <link rel="stylesheet" href="testquad.css">
   </head>
   <body>
     <div class="containment">
-      <div class="top" id="top"><img src="images/invite_up_crop.jpg"></div>
-      <div class="left go" id="left"><img src="images/invite_landing_crop.jpg" /></div>
-      <div class="bottom" id="bottom"><img src="images/invite_down_crop.jpg" /></div>
-      <div class="right" id="right"><img src="images/invite_right_crop.jpg" /></div>
+      <div class="top" id="top">
+        <div class="panel">
+          <div class="countdown">
+            <div class="times">
+              <div id="weeks"></div><!--
+            --><div id="days"></div><!--
+            --><div id="hours"></div><!--
+            --><div id="minutes"></div><!--
+            --><div id="seconds"></div>
+            </div>
+            <div class="labels">
+              <div>WEEKS</div><!--
+            --><div>DAYS</div><!--
+            --><div>HOURS</div><!--
+            --><div>MINUTES</div><!--
+            --><div>SECONDS</div>
+            </div>
+          </div>
+          <button class="cal-btn">ADD TO CALENDAR</button>
+        </div>
+      </div>
+      <div class="left go" id="left">
+        <div class="panel">
+          <h1>DESIGN &amp; MARKETING</h1>
+        </div>
+      </div>
+      <div class="bottom" id="bottom">
+        <div class="panel">
+          <div class="subpanel">
+            <div>WE CAN'T WAIT TO SEE YOU DAWG!</div>
+          </div><div class="subpanel">
+            <form class="rsvp">
+              <input id="name" class="default-input" placeholder="name" required />
+              <input id="company" class="default-input" placeholder="company" required />
+              <input id="email" class="default-input" placeholder="email" required />
+              <button class="res-btn" disabled >I'll Be There</button>
+              <button class="res-btn" disabled >I'll Be Square</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="right" id="right">
+        <div class="panel">
+          <div class="subpanel">
+              <div>COME DOWNTOWN. SEE WHAT'S UP.</div>
+              <div class="address">125 S. Clark<br>Floor 11</div>
+            </div><div class="subpanel">
+              map
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="top-go"><div>RSVP</div></div>
+
+    <div id="top-go"><div>APRIL 12 | 6PM</div></div>
     <div id="left-go" class="go"><div></div></div>
-    <div id="bottom-go"><div>April 12 | 6PM</div></div>
-    <div id="right-go"><div>Chicago, IL</div></div>
-    <script type="text/javascript">
-      let navInit = () => {
-        var top = document.getElementById('top')
-        var bottom = document.getElementById('bottom')
-        var left = document.getElementById('left')
-        var right = document.getElementById('right')
+    <div id="bottom-go"><div>RSVP</div></div>
+    <div id="right-go"><div>LOCATION</div></div>
 
-        var topGo = document.getElementById('top-go')
-        var leftGo = document.getElementById('left-go')
-        var bottomGo = document.getElementById('bottom-go')
-        var rightGo = document.getElementById('right-go')
-        
-        const createEventHandler = classes => {
-          return e => {
-            top.className = classes.top || 'top'
-            left.className = classes.left || 'left'
-            bottom.className = classes.bottom || 'bottom'
-            right.className = classes.right || 'right'
-
-            topGo.className = classes.topGo || ''
-            leftGo.className = classes.leftGo || ''
-            bottomGo.className = classes.bottomGo || ''
-            rightGo.className = classes.rightGo || ''
-          }
-        }
-
-        topGo.onmouseover = e => {
-          if (topGo.className !== 'go') {
-            createEventHandler({
-              top: 'top ready',
-              left: left.className,
-              bottom: bottom.className,
-              right: right.className
-            })(e)
-          }
-        }
-        leftGo.onmouseover = e => {
-          if (leftGo.className !== 'go') {
-            createEventHandler({
-              top: top.className,
-              left: 'left ready',
-              bottom: bottom.className,
-              right: right.className
-            })(e)
-          }
-        }
-        bottomGo.onmouseover = e => {
-          if (bottomGo.className !== 'go') {
-            createEventHandler({
-              top: top.className,
-              left: left.className,
-              bottom: 'bottom ready',
-              right: right.className
-            })(e)
-          }
-        }
-        rightGo.onmouseover = e => {
-          if (rightGo.className !== 'go') {
-            createEventHandler({
-              top: top.className,
-              left: left.className,
-              bottom: bottom.className,
-              right: 'right ready'
-            })(e)
-          }
-        }
-
-        topGo.onmouseleave = e => {
-          createEventHandler(
-            (topGo.className === 'go') ?
-            {top: 'top go', topGo: 'go'}
-            :
-            {left: left.className, bottom: bottom.className, right: right.className}
-          )(e)
-        }
-        leftGo.onmouseleave = e => {
-          createEventHandler(
-            (leftGo.className === 'go') ?
-            {left: 'left go', leftGo: 'go'}
-            :
-            {top: top.className, bottom: bottom.className, right: right.className}
-          )(e)
-        }
-        bottomGo.onmouseleave = e => {
-          createEventHandler(
-            (bottomGo.className === 'go') ?
-            {bottom: 'bottom go', bottomGo: 'go'}
-            :
-            {top: top.className, left: left.className, right: right.className}
-          )(e)
-        }
-        rightGo.onmouseleave = e => {
-          createEventHandler(
-            (rightGo.className === 'go') ?
-            {right: 'right go', rightGo: 'go'}
-            :
-            {top: top.className, left: left.className, bottom: bottom.className}
-          )(e)
-        }
-
-
-
-        topGo.onclick = createEventHandler({top: 'top go', topGo: 'go'})
-        leftGo.onclick = createEventHandler({left: 'left go', leftGo: 'go'})
-        bottomGo.onclick = createEventHandler({bottom: 'bottom go', bottomGo: 'go'})
-        rightGo.onclick = createEventHandler({right: 'right go', rightGo: 'go'})
-
-      }
-      navInit()
-    </script>
+    <script type="text/javascript" src="testquad.js"></script>
   </body>
 </html>

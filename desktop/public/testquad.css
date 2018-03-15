@@ -1,0 +1,287 @@
+body {
+  margin: 0
+}
+.containment {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden
+}
+h1 {
+  position: absolute;
+  margin: 0;
+  top: 80%;
+  width: 100%;
+  text-align: center;
+  /* font-weight:  */
+}
+
+.top {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  top: -100%;
+  left: 0;
+  transition-property: top;
+  transition-duration: .2s;
+  transition-delay: 0
+}
+.top.ready {
+  top: -70%;
+  z-index: 2
+}
+.top.go {
+  top: 0;
+  z-index: 1
+}
+.left {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  top: 0;
+  left: -100vw;
+  transition-property: left;
+  transition-duration: .2s;
+  transition-delay: 0;
+  color: #FFFFFF
+}
+.left.ready {
+  left: -70vw;
+  z-index: 2
+}
+.left.go {
+  left: 0;
+  z-index: 1
+}
+.bottom {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  top: 100%;
+  left: 0;
+  transition-property: top;
+  transition-duration: .2s;
+  transition-delay: 0
+}
+.bottom.ready {
+  top: 70%;
+  z-index: 2
+}
+.bottom.go {
+  top: 0;
+  z-index: 1
+}
+.right {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  top: 0;
+  left: 100vw;
+  transition-property: left;
+  transition-duration: .2s;
+  transition-delay: 0
+}
+.right.ready {
+  left: 70vw;
+  z-index: 2
+}
+.right.go {
+  left: 0;
+  z-index: 1
+}
+
+
+#top-go, #left-go, #right-go, #bottom-go {
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  z-index: 3;
+  position: fixed;
+}
+#top-go {
+  height: 69px;
+  top: 0;
+  left: 69px;
+  width: calc(100% - 138px)
+}
+#top-go > div {
+  line-height: 69px
+}
+#top-go.go > div::before {
+  content: ' ';
+  background-color: #EA0029;
+  height: 4px;
+  width: 154px;
+  margin-left: -14px;
+  margin-top: 32px;
+  position: absolute;
+  z-index: -1
+}
+#left-go {
+  width: 69px;
+  left: 0;
+  top: 69px;
+  height: calc(100% - 138px)
+}
+#left-go > div {
+  width: 20px;
+  height: 20px;
+  background-color: #EA0029;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: 2px solid #EA0029;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+#left-go.go > div {
+  background-color: #FFFFFF; /*shoutout to ie*/
+  background-color: initial
+}
+#bottom-go {
+  height: 69px;
+  bottom: 0;
+  width: calc(100% - 138px);
+  left: 69px;
+}
+#bottom-go > div {
+  line-height: 69px
+}
+#bottom-go.go > div::before {
+  content: ' ';
+  background-color: #EA0029;
+  height: 4px;
+  width: 80px;
+  margin-left: -14px;
+  margin-top: 32px;
+  position: absolute;
+  z-index: -1
+}
+#right-go {
+  width: 69px;
+  right: 0;
+  top: 69px;
+  height: calc(100% - 138px)
+}
+#right-go > div {
+  line-height: 69px;
+  transform: rotate(-90deg);
+  width: 200px;
+  padding-bottom: 131px;
+  position: absolute;
+  top: calc(50% - 100px)
+}
+#right-go.go > div::before {
+  content: ' ';
+  background-color: #EA0029;
+  height: 4px;
+  width: 130px;
+  margin-left: -14px;
+  margin-top: 32px;
+  position: absolute;
+  z-index: -1
+}
+
+
+.panel {
+  position: relative;
+  width: calc(100% - 138px);
+  height: calc(100% - 138px);
+  margin: 69px;
+  border: 1px solid #EA0029;
+  background-color: white
+}
+#left .panel {
+  border-color: #333333;
+  background-color: #333333
+}
+
+.subpanel {
+  height: 100%;
+  width: 50%;
+  display: inline-block
+}
+#bottom .subpanel {
+  width: calc(50% - 228px);
+  padding-left: 114px;
+  padding-right: 114px
+}
+
+.cal-btn {
+  width: 212px;
+  height: 42px;
+  border: 1px solid #EA0029;
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #EA0029;
+  /* font-weight: bold */
+  text-align: center;
+  line-height: 42px;
+  cursor: pointer;
+}
+#top .cal-btn {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%)
+}
+
+.countdown {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1200px
+}
+.times div {
+  font-size: 96px;
+  color: #EA0029
+}
+.labels div {
+  font-size: 24px;
+  font-weight: bold;
+}
+.times div, .labels div {
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+  margin: auto
+}
+
+.default-input {
+  width: 100%;
+}
+
+.rsvp {
+  position: relative;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.res-btn {
+  border: 1px solid #EA0029;
+  color: #FFFFFF;
+  background-color: #EA0029;
+  cursor: pointer;
+  width: calc(50% - 12px);
+  position: absolute;
+  left: 0
+}
+.res-btn + .res-btn {
+  left: inherit;
+  right: 0
+}
+
+.res-btn:disabled {
+  color: #EA0029;
+  background-color: #FFFFFF
+}
+
+.address {
+  font-weight: bold
+}

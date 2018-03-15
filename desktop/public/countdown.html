@@ -20,7 +20,7 @@
       }
       .times div, .labels div {
         display: inline-block;
-        width: 25%;
+        width: 20%;
         text-align: center;
         margin: auto
       }
@@ -29,20 +29,42 @@
   <body>
     <div class="countdown">
       <div class="times">
-        <div id="weeks"></div>
-        <div id="days"></div>
-        <div id="hours"></div>
-        <div id="minutes"></div>
-        <div id="seconds"></div>
+        <div id="weeks"></div><!--
+      --><div id="days"></div><!--
+      --><div id="hours"></div><!--
+      --><div id="minutes"></div><!--
+      --><div id="seconds"></div>
       </div>
       <div class="labels">
-          <div>Weeks</div>
-          <div>Days</div>
-          <div>Hours</div>
-          <div>Minutes</div>
-          <div>Seconds</div>
-        </div>
-      <div class="labels"></div>
+        <div>WEEKS</div><!--
+      --><div>DAYS</div><!--
+      --><div>HOURS</div><!--
+      --><div>MINUTES</div><!--
+      --><div>SECONDS</div>
+      </div>
     </div>
+    <script>
+      var date = new Date('April 12, 2018 18:00:00').getTime()
+      var weeks = document.getElementById('weeks')
+      var days = document.getElementById('days')
+      var hours = document.getElementById('hours')
+      var minutes = document.getElementById('minutes')
+      var seconds = document.getElementById('seconds')
+      function addLeadingZero(int) {
+        return (int < 10) ? '0' + int : int
+      }
+      function gotTheTime() {
+        var now = new Date().getTime()
+        var dif = date - now
+        
+        weeks.innerText = addLeadingZero(Math.floor(dif / (1000 * 60 * 60 * 24 * 7)))
+        days.innerText = addLeadingZero(Math.floor(dif / (1000 * 60 * 60 * 24)))
+        hours.innerText = addLeadingZero(Math.floor((dif % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))
+        minutes.innerText = addLeadingZero(Math.floor((dif % (1000 * 60 * 60)) / (1000 * 60)))
+        seconds.innerText = addLeadingZero(Math.floor((dif % (1000 * 60)) / 1000))
+      }
+      gotTheTime()
+      setInterval(gotTheTime, 1000)
+    </script>
   </body>
 </html>
