@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style>
+      .countdown {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        max-width: 1200px
+      }
+      .times div {
+        font-size: 96px;
+        color: #d53036
+      }
+      .labels div {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .times div, .labels div {
+        display: inline-block;
+        width: 25%;
+        text-align: center;
+        margin: auto
+      }
+    </style>
+  </head>
+  <body>
+    <div class="countdown">
+      <div class="times">
+        <div id="weeks"></div>
+        <div id="days"></div>
+        <div id="hours"></div>
+        <div id="minutes"></div>
+        <div id="seconds"></div>
+      </div>
+      <div class="labels">
+          <div>Weeks</div>
+          <div>Days</div>
+          <div>Hours</div>
+          <div>Minutes</div>
+          <div>Seconds</div>
+        </div>
+      <div class="labels"></div>
+    </div>
+  </body>
+</html>

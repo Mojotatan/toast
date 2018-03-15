@@ -6,8 +6,9 @@
       .containment {position: relative; width: 100%; height: 100vh; overflow: hidden}
       .left {position: absolute; width: 100vw; height: 100%; top: 0; left: -100vw; transition-property: left; transition-duration: .2s; transition-delay: 0}
       .left.go {left: 0}
-      .top {position: absolute; width: 100vw; height: 100%; top: 0; left: 0; transition-property: top; transition-duration: .2s; transition-delay: 0}
-      .top.gone {top: -100%}
+      .top {position: absolute; width: 100vw; height: 100%; top: -100%; left: 0; transition-property: top; transition-duration: .2s; transition-delay: 0}
+      .top.ready {top: -50%}
+      .top.go {top: 0}
       .bottom {position: absolute; width: 100vw; height: 100%; top: 100%; left: 0; transition-property: top; transition-duration: .2s; transition-delay: 0}
       .bottom.go {top: 0}
       .right {position: absolute; width: 100vw; height: 100%; top: 0; left: 100vw; transition-property: left; transition-duration: .2s; transition-delay: 0}
@@ -16,14 +17,17 @@
 
       #top-go, #left-go, #right-go, #bottom-go {
         cursor: pointer;
-        color: white;
-        background-color: blue;
-        border: none;
-        font-size: 16px
+        /* color: #D53036; */
+        /* background-color: blue; */
+        /* border: none; */
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center
       }
       .containment img {
         position: absolute;
-        height: 50%;
+        max-width: calc(100% - 100px);
+        max-height: calc(100% - 100px);
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%)
@@ -33,95 +37,181 @@
         position: fixed;
         height: 50px;
         top: 0;
-        left: 10%;
-        width: 80%
+        left: 50px;
+        width: calc(100% - 100px)
+      }
+      #top-go > div {
+        line-height: 50px
+      }
+      #top-go.go > div::before {
+        content: ' ';
+        background-color: #d53036;
+        height: 4px;
+        width: 80px;
+        margin-left: -14px;
+        margin-top: 22px;
+        position: absolute;
+        z-index: -1
       }
       #left-go {
         z-index: 1;
         position: fixed;
         width: 50px;
         left: 0;
-        top: 10%;
-        height: 80%;
+        top: 50px;
+        height: calc(100% - 100px)
+      }
+      #left-go > div {
+        width: 20px;
+        height: 20px;
+        background-color: #d53036;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        border: 2px solid #d53036;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%)
+      }
+      #left-go.go > div {
+        background-color: white; /*shoutout to ie*/
+        background-color: initial
       }
       #right-go {
         z-index: 1;
         position: fixed;
         width: 50px;
         right: 0;
-        top: 10%;
-        height: 80%
+        top: 50px;
+        height: calc(100% - 100px)
+      }
+      #right-go > div {
+        line-height: 50px;
+        transform: rotate(-90deg);
+        width: 200px;
+        padding-bottom: 150px;
+        position: absolute;
+        top: calc(50% - 100px)
+      }
+      #right-go.go > div::before {
+        content: ' ';
+        background-color: #d53036;
+        height: 4px;
+        width: 130px;
+        margin-left: -14px;
+        margin-top: 22px;
+        position: absolute;
+        z-index: -1
       }
       #bottom-go {
         z-index: 1;
         position: fixed;
         height: 50px;
         bottom: 0;
-        width: 80%;
-        left: 10%
+        width: calc(100% - 100px);
+        left: 50px;
+      }
+      #bottom-go > div {
+        line-height: 50px
+      }
+      #bottom-go.go > div::before {
+        content: ' ';
+        background-color: #d53036;
+        height: 4px;
+        width: 154px;
+        margin-left: -14px;
+        margin-top: 22px;
+        position: absolute;
+        z-index: -1
       }
     </style>
   </head>
   <body>
     <div class="containment">
-      <div class="top" id="top"><img src="image001.jpg"></div>
-      <div class="left" id="left"><img src="1318.jpg" /></div>
-      <div class="bottom" id="bottom"><img src="1318.jpg" /></div>
-      <div class="right" id="right"><img src="1318.jpg" /></div>
+      <div class="top" id="top"><img src="images/invite_up_crop.jpg"></div>
+      <div class="left go" id="left"><img src="images/invite_landing_crop.jpg" /></div>
+      <div class="bottom" id="bottom"><img src="images/invite_down_crop.jpg" /></div>
+      <div class="right" id="right"><img src="images/invite_right_crop.jpg" /></div>
     </div>
-    <button id="top-go">Go up</button>
-    <button id="left-go">Go left</button>
-    <button id="bottom-go">Go bottom</button>
-    <button id="right-go">Go right</button>
+    <div id="top-go"><div>RSVP</div></div>
+    <div id="left-go" class="go"><div></div></div>
+    <div id="bottom-go"><div>April 12 | 6PM</div></div>
+    <div id="right-go"><div>Chicago, IL</div></div>
     <script type="text/javascript">
-      function takeMeTop(e) {
+      let navInit = () => {
         var top = document.getElementById('top')
         var bottom = document.getElementById('bottom')
         var left = document.getElementById('left')
         var right = document.getElementById('right')
-        top.className = 'top'
-        bottom.className = 'bottom'
-        left.className = 'left'
-        right.className = 'right'
+
+        var topGo = document.getElementById('top-go')
+        var leftGo = document.getElementById('left-go')
+        var bottomGo = document.getElementById('bottom-go')
+        var rightGo = document.getElementById('right-go')
+        
+        topGo.onmouseover = function takeMeTop(e) {
+          top.className = 'top ready'
+          bottom.className = 'bottom'
+          left.className = 'left'
+          right.className = 'right'
+
+          topGo.className = 'go'
+          leftGo.className = ''
+          bottomGo.className = ''
+          rightGo.className = ''
+        }
+
+        topGo.onclick = function takeMeTop(e) {
+          top.className = 'top go'
+          bottom.className = 'bottom'
+          left.className = 'left'
+          right.className = 'right'
+
+          topGo.className = 'go'
+          leftGo.className = ''
+          bottomGo.className = ''
+          rightGo.className = ''
+        }
+
+        leftGo.onclick = function takeMeLeft(e) {
+          top.className = 'top'
+          bottom.className = 'bottom'
+          left.className = 'left go'
+          right.className = 'right'
+
+          topGo.className = ''
+          bottomGo.className = ''
+          leftGo.className = 'go'
+          rightGo.className = ''
+        }
+
+        bottomGo.onclick = function takeMeBottom(e) {
+          top.className = 'top'
+          bottom.className = 'bottom go'
+          left.className = 'left'
+          right.className = 'right'
+
+          topGo.className = ''
+          bottomGo.className = 'go'
+          leftGo.className = ''
+          rightGo.className = ''
+        }
+
+        rightGo.onclick = function takeMeRight(e) {
+          top.className = 'top'
+          bottom.className = 'bottom'
+          right.className = 'right go'
+          left.className = 'left'
+
+          topGo.className = ''
+          bottomGo.className = ''
+          leftGo.className = ''
+          rightGo.className = 'go'
+        }
+
       }
-      function takeMeLeft(e) {
-        var top = document.getElementById('top')
-        var bottom = document.getElementById('bottom')
-        var left = document.getElementById('left')
-        var right = document.getElementById('right')
-        top.className = 'top gone'
-        bottom.className = 'bottom'
-        left.className = 'left go'
-        right.className = 'right'
-      }
-      function takeMeBottom(e) {
-        var top = document.getElementById('top')
-        var bottom = document.getElementById('bottom')
-        var left = document.getElementById('left')
-        var right = document.getElementById('right')
-        top.className = 'top gone'
-        bottom.className = 'bottom go'
-        left.className = 'left'
-        right.className = 'right'
-      }
-      function takeMeRight(e) {
-        var top = document.getElementById('top')
-        var bottom = document.getElementById('bottom')
-        var right = document.getElementById('right')
-        var left = document.getElementById('left')
-        top.className = 'top gone'
-        bottom.className = 'bottom'
-        right.className = 'right go'
-        left.className = 'left'
-      }
-      var topGo = document.getElementById('top-go')
-      topGo.onmouseover = takeMeTop
-      var leftGo = document.getElementById('left-go')
-      leftGo.onmouseover = takeMeLeft
-      var bottomGo = document.getElementById('bottom-go')
-      bottomGo.onmouseover = takeMeBottom
-      var rightGo = document.getElementById('right-go')
-      rightGo.onmouseover = takeMeRight
+      navInit()
     </script>
   </body>
 </html>

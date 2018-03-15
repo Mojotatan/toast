@@ -89,6 +89,10 @@ db.sync({force: true})
       res.sendFile(path.resolve(__dirname, './desktop/public/testquad.html'))
     })
 
+    .get('/countdown', (req, res) => {
+      res.sendFile(path.resolve(__dirname, './desktop/public/countdown.html'))
+    })
+
     .get('/mask', (req, res) => {
       res.sendFile(path.resolve(__dirname, './desktop/public/mask.html'))
     })
