@@ -4,14 +4,17 @@
     <style>
       body {margin: 0}
       .containment {position: relative; width: 100%; height: 100vh; overflow: hidden}
-      .left {position: absolute; width: 100vw; height: 100%; top: 0; left: -100vw; transition-property: left; transition-duration: .2s; transition-delay: 0}
-      .left.go {left: 0}
       .top {position: absolute; width: 100vw; height: 100%; top: -100%; left: 0; transition-property: top; transition-duration: .2s; transition-delay: 0}
       .top.ready {top: -50%}
       .top.go {top: 0}
+      .left {position: absolute; width: 100vw; height: 100%; top: 0; left: -100vw; transition-property: left; transition-duration: .2s; transition-delay: 0}
+      .left.ready {left: -50vw}
+      .left.go {left: 0}
       .bottom {position: absolute; width: 100vw; height: 100%; top: 100%; left: 0; transition-property: top; transition-duration: .2s; transition-delay: 0}
+      .bottom.ready {top: 50%}
       .bottom.go {top: 0}
       .right {position: absolute; width: 100vw; height: 100%; top: 0; left: 100vw; transition-property: left; transition-duration: .2s; transition-delay: 0}
+      .right.ready {left: 50vw}
       .right.go {left: 0}
       
 
@@ -150,65 +153,100 @@
         var bottomGo = document.getElementById('bottom-go')
         var rightGo = document.getElementById('right-go')
         
-        topGo.onmouseover = function takeMeTop(e) {
-          top.className = 'top ready'
-          bottom.className = 'bottom'
-          left.className = 'left'
-          right.className = 'right'
+        const createEventHandler = classes => {
+          return e => {
+            top.className = classes.top || 'top'
+            left.className = classes.left || 'left'
+            bottom.className = classes.bottom || 'bottom'
+            right.className = classes.right || 'right'
 
-          topGo.className = 'go'
-          leftGo.className = ''
-          bottomGo.className = ''
-          rightGo.className = ''
+            topGo.className = classes.topGo || ''
+            leftGo.className = classes.leftGo || ''
+            bottomGo.className = classes.bottomGo || ''
+            rightGo.className = classes.rightGo || ''
+          }
         }
 
-        topGo.onclick = function takeMeTop(e) {
-          top.className = 'top go'
-          bottom.className = 'bottom'
-          left.className = 'left'
-          right.className = 'right'
-
-          topGo.className = 'go'
-          leftGo.className = ''
-          bottomGo.className = ''
-          rightGo.className = ''
+        topGo.onmouseover = e => {
+          if (topGo.className !== 'go') {
+            createEventHandler({
+              top: 'top ready',
+              left: left.className,
+              bottom: bottom.className,
+              right: right.className
+            })(e)
+          }
+        }
+        leftGo.onmouseover = e => {
+          if (leftGo.className !== 'go') {
+            createEventHandler({
+              top: top.className,
+              left: 'left ready',
+              bottom: bottom.className,
+              right: right.className
+            })(e)
+          }
+        }
+        bottomGo.onmouseover = e => {
+          if (bottomGo.className !== 'go') {
+            createEventHandler({
+              top: top.className,
+              left: left.className,
+              bottom: 'bottom ready',
+              right: right.className
+            })(e)
+          }
+        }
+        rightGo.onmouseover = e => {
+          if (rightGo.className !== 'go') {
+            createEventHandler({
+              top: top.className,
+              left: left.className,
+              bottom: bottom.className,
+              right: 'right ready'
+            })(e)
+          }
         }
 
-        leftGo.onclick = function takeMeLeft(e) {
-          top.className = 'top'
-          bottom.className = 'bottom'
-          left.className = 'left go'
-          right.className = 'right'
-
-          topGo.className = ''
-          bottomGo.className = ''
-          leftGo.className = 'go'
-          rightGo.className = ''
+        topGo.onmouseleave = e => {
+          createEventHandler(
+            (topGo.className === 'go') ?
+            {top: 'top go', topGo: 'go'}
+            :
+            {left: left.className, bottom: bottom.className, right: right.className}
+          )(e)
+        }
+        leftGo.onmouseleave = e => {
+          createEventHandler(
+            (leftGo.className === 'go') ?
+            {left: 'left go', leftGo: 'go'}
+            :
+            {top: top.className, bottom: bottom.className, right: right.className}
+          )(e)
+        }
+        bottomGo.onmouseleave = e => {
+          createEventHandler(
+            (bottomGo.className === 'go') ?
+            {bottom: 'bottom go', bottomGo: 'go'}
+            :
+            {top: top.className, left: left.className, right: right.className}
+          )(e)
+        }
+        rightGo.onmouseleave = e => {
+          createEventHandler(
+            (rightGo.className === 'go') ?
+            {right: 'right go', rightGo: 'go'}
+            :
+            {top: top.className, left: left.className, bottom: bottom.className}
+          )(e)
         }
 
-        bottomGo.onclick = function takeMeBottom(e) {
-          top.className = 'top'
-          bottom.className = 'bottom go'
-          left.className = 'left'
-          right.className = 'right'
 
-          topGo.className = ''
-          bottomGo.className = 'go'
-          leftGo.className = ''
-          rightGo.className = ''
-        }
 
-        rightGo.onclick = function takeMeRight(e) {
-          top.className = 'top'
-          bottom.className = 'bottom'
-          right.className = 'right go'
-          left.className = 'left'
-
-          topGo.className = ''
-          bottomGo.className = ''
-          leftGo.className = ''
-          rightGo.className = 'go'
-        }
+        topGo.onclick = createEventHandler({top: 'top go', topGo: 'go'})
+        leftGo.onclick = createEventHandler({left: 'left go', leftGo: 'go'})
+        bottomGo.onclick = createEventHandler({bottom: 'bottom go', bottomGo: 'go'})
+        rightGo.onclick = createEventHandler({right: 'right go', rightGo: 'go'})
 
       }
       navInit()
