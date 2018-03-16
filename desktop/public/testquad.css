@@ -108,14 +108,14 @@ h1 {
 }
 #top-go > div {
   line-height: 69px;
-  letter-spacing: 2px
+  letter-spacing: 4px
 }
 #top-go.go > div::before {
   content: ' ';
   background-color: #EA0029;
   height: 4px;
-  width: 154px;
-  margin-left: -14px;
+  width: 189px;
+  margin-left: -10px;
   margin-top: 32px;
   position: absolute;
   z-index: -1
@@ -151,14 +151,14 @@ h1 {
 }
 #bottom-go > div {
   line-height: 69px;
-  letter-spacing: 2px
+  letter-spacing: 4px
 }
 #bottom-go.go > div::before {
   content: ' ';
   background-color: #EA0029;
   height: 4px;
-  width: 80px;
-  margin-left: -14px;
+  width: 125px;
+  margin-left: -35px;
   margin-top: 32px;
   position: absolute;
   z-index: -1
@@ -176,14 +176,14 @@ h1 {
   padding-bottom: 131px;
   position: absolute;
   top: calc(50% - 100px);
-  letter-spacing: 2px
+  letter-spacing: 4px
 }
 #right-go.go > div::before {
   content: ' ';
   background-color: #EA0029;
   height: 4px;
-  width: 130px;
-  margin-left: -14px;
+  width: 185px;
+  margin-left: -32px;
   margin-top: 32px;
   position: absolute;
   z-index: -1
@@ -211,20 +211,33 @@ h1 {
 #bottom .subpanel {
   width: calc(50% - 228px);
   padding-left: 114px;
-  padding-right: 114px
+  padding-right: 114px;
+  vertical-align: top
+}
+#right .subpanel {
+  width: calc(50% - 136px);
+  padding-left: 68px;
+  padding-right: 68px;
+  vertical-align: top
+}
+#right .subpanel + .subpanel {
+  width: 50%;
+  padding: 0
 }
 
 .cal-btn {
   width: 212px;
   height: 42px;
   border: 1px solid #EA0029;
-  font-family: sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #EA0029;
-  /* font-weight: bold */
+  font-weight: 700;
   text-align: center;
   line-height: 42px;
   cursor: pointer;
+  letter-spacing: 2px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 #top .cal-btn {
   position: absolute;
@@ -249,6 +262,7 @@ h1 {
 .labels div {
   font-size: 24px;
   font-weight: bold;
+  letter-spacing: 4px
 }
 .times div, .labels div {
   display: inline-block;
@@ -258,17 +272,33 @@ h1 {
 }
 
 .default-input {
-  width: 100%;
+  width: calc(100% - 42px);
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 16px;
-  padding-bottom: 16px
+  padding-bottom: 16px;
+  font-family: mr-eaves-modern, sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid #757575;
+  margin-bottom: 16px
+}
+
+.default-input::placeholder {
+  text-transform: lowercase
+}
+.default-input:-ms-input-placeholder {
+  text-transform: lowercase
+}
+.default-input::-ms-input-placeholder {
+  text-transform: lowercase
 }
 
 .rsvp {
   position: relative;
   width: 100%;
-  top: 50%;
+  top: calc(50% - 28px);
   transform: translateY(-50%)
 }
 
@@ -280,14 +310,13 @@ h1 {
   width: calc(50% - 12px);
   position: absolute;
   left: 0;
-  padding-left: 20px;
-  padding-right: 20px;
   padding-top: 16px;
   padding-bottom: 16px;
   text-align: center;
   font-weight: 700;
   font-size: 20px;
-  letter-spacing: 2px
+  letter-spacing: 2px;
+  margin-top: 16px
 }
 .res-btn + .res-btn {
   left: inherit;
@@ -300,7 +329,11 @@ h1 {
 }
 
 .address {
-  font-weight: bold
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  position: absolute;
+  top: 60%
 }
 
 #left img {
@@ -308,4 +341,44 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%)
+}
+
+
+#bottom p {
+  font-size: 48px;
+  font-weight: 200;
+  margin: 0;
+  letter-spacing: 8px;
+  max-width: 450px;
+  position: absolute;
+  top: 40%
+}
+#right p {
+  font-size: 48px;
+  font-weight: 200;
+  margin: 0;
+  letter-spacing: 8px;
+  max-width: 494px;
+  position: absolute;
+  top: 42%
+}
+
+#temperature {
+  font-family: lust-didone, serif;
+  font-size: 96px;
+  line-height: 96px;
+  color: #EA0029;
+  position: absolute;
+  top: 68px
+}
+
+#mce-success-response::before {
+  content: "YOUR RSVP HAS BEEN SENT.";
+  position: absolute;
+  background-color: white;
+}
+#mce-success-response::after {
+  content: "THANK YOU!";
+  display: block;
+  background-color: white;
 }
