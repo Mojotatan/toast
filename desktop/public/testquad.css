@@ -1,5 +1,6 @@
 body {
-  margin: 0
+  margin: 0;
+  font-family: mr-eaves-modern, sans-serif
 }
 .containment {
   position: relative;
@@ -106,7 +107,8 @@ h1 {
   width: calc(100% - 138px)
 }
 #top-go > div {
-  line-height: 69px
+  line-height: 69px;
+  letter-spacing: 2px
 }
 #top-go.go > div::before {
   content: ' ';
@@ -148,7 +150,8 @@ h1 {
   left: 69px;
 }
 #bottom-go > div {
-  line-height: 69px
+  line-height: 69px;
+  letter-spacing: 2px
 }
 #bottom-go.go > div::before {
   content: ' ';
@@ -172,7 +175,8 @@ h1 {
   width: 200px;
   padding-bottom: 131px;
   position: absolute;
-  top: calc(50% - 100px)
+  top: calc(50% - 100px);
+  letter-spacing: 2px
 }
 #right-go.go > div::before {
   content: ' ';
@@ -238,6 +242,7 @@ h1 {
   max-width: 1200px
 }
 .times div {
+  font-family: lust-didone, serif;
   font-size: 96px;
   color: #EA0029
 }
@@ -254,6 +259,10 @@ h1 {
 
 .default-input {
   width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 16px;
+  padding-bottom: 16px
 }
 
 .rsvp {
@@ -270,18 +279,33 @@ h1 {
   cursor: pointer;
   width: calc(50% - 12px);
   position: absolute;
-  left: 0
+  left: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 2px
 }
 .res-btn + .res-btn {
   left: inherit;
   right: 0
 }
 
-.res-btn:disabled {
+.dis.res-btn {
   color: #EA0029;
   background-color: #FFFFFF
 }
 
 .address {
   font-weight: bold
+}
+
+#left img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
 }

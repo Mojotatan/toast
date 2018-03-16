@@ -124,21 +124,35 @@ let timeInit = () => {
 timeInit()
 
 let formInit = () => {
-  var name = document.getElementById('name')
-  var company = document.getElementById('company')
-  var email = document.getElementById('email')
-  var btns = document.querySelectorAll('.res-btn')
+  var name = document.getElementById('mce-NAME')
+  var company = document.getElementById('mce-EMAIL')
+  var email = document.getElementById('mce-COMPANY')
+
+  var disable = document.getElementById('disable')
+  var enable = document.getElementById('enable')
   
   let onChange = e => {
     if (name.value && company.value && email.value) {
-      btns.forEach(btn => btn.disabled = false)
+      disable.hidden = true
+      enable.hidden = false
     } else {
-      btns.forEach(btn => btn.disabled = true)
+      disable.hidden = false
+      enable.hidden = true
     }
   }
 
   name.oninput = onChange
   company.oninput = onChange
   email.oninput = onChange
+
+  var yes = document.getElementById('mce-ATTENDING-0')
+  var no = document.getElementById('mce-ATTENDING-1')
+
+  document.querySelector('.res-btn.yes').onclick = e => {
+    yes.checked = true
+  }
+  document.querySelector('.res-btn.no').onclick = e => {
+    no.checked = true
+  }
 }
 formInit()
