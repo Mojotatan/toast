@@ -28,7 +28,7 @@ h1 {
   transition-delay: 0
 }
 .top.ready {
-  top: -70%;
+  top: -80%;
   z-index: 2
 }
 .top.go {
@@ -47,7 +47,7 @@ h1 {
   color: #FFFFFF
 }
 .left.ready {
-  left: -70vw;
+  left: -85vw;
   z-index: 2
 }
 .left.go {
@@ -65,7 +65,7 @@ h1 {
   transition-delay: 0
 }
 .bottom.ready {
-  top: 70%;
+  top: 80%;
   z-index: 2
 }
 .bottom.go {
@@ -83,7 +83,7 @@ h1 {
   transition-delay: 0
 }
 .right.ready {
-  left: 70vw;
+  left: 85vw;
   z-index: 2
 }
 .right.go {
@@ -227,13 +227,11 @@ h1 {
 
 .cal-btn {
   width: 212px;
-  height: 42px;
   border: 1px solid #EA0029;
-  font-size: 18px;
+  font-size: 20px;
   color: #EA0029;
   font-weight: 700;
   text-align: center;
-  line-height: 42px;
   cursor: pointer;
   letter-spacing: 2px;
   padding-top: 16px;
@@ -241,7 +239,7 @@ h1 {
 }
 #top .cal-btn {
   position: absolute;
-  top: 80%;
+  top: 70%;
   left: 50%;
   transform: translateX(-50%)
 }
@@ -249,7 +247,7 @@ h1 {
 .countdown {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 45%;
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 1200px
@@ -282,6 +280,9 @@ h1 {
   letter-spacing: 1px;
   text-transform: uppercase;
   border: 1px solid #757575;
+  /* margin-bottom: 16px */
+}
+.mc-field-group {
   margin-bottom: 16px
 }
 
@@ -381,4 +382,12 @@ h1 {
   content: "THANK YOU!";
   display: block;
   background-color: white;
+}
+
+.addeventatc_dropdown span {
+  display: block;
+  text-transform: uppercase
+}
+.mce_inline_error {
+  text-transform: uppercase
 }

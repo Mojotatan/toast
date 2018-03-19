@@ -157,6 +157,19 @@ let formInit = () => {
 }
 formInit()
 
+function tempInit() {
+  var xhttp = new XMLHttpRequest()
+  xhttp.open("GET", "http://api.openweathermap.org/data/2.5/weather?id=4887398&APPID=cf229bba05091c9ab1016bd0336e9faa", true)
+  xhttp.send()
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(JSON.parse(this.responseText))
+      document.getElementById('temperature').innerText = Math.round((JSON.parse(this.responseText).main.temp - 273.15) * 9/5 + 32) + '˚'
+   }
+};
+}
+tempInit()
+
 // Google maps
 function initMap() {
   // var uluru = '125+South+Clark+Street,Chicago,Illinois';
