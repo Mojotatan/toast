@@ -91,6 +91,10 @@ h1 {
   z-index: 1
 }
 
+.nudge-from-right {
+  left: -15vw
+}
+
 
 #top-go, #left-go, #right-go, #bottom-go {
   cursor: pointer;
@@ -99,16 +103,20 @@ h1 {
   text-align: center;
   z-index: 3;
   position: fixed;
+  background-color: #FFFFFF
 }
 #top-go {
   height: 69px;
   top: 0;
   left: 69px;
-  width: calc(100% - 138px)
+  width: calc(100% - 138px);
 }
 #top-go > div {
   line-height: 69px;
   letter-spacing: 4px
+}
+#top-go:hover {
+  border-bottom: 1px solid #EA0029
 }
 #top-go.go > div::before {
   content: ' ';
@@ -124,7 +132,7 @@ h1 {
   width: 69px;
   left: 0;
   top: 69px;
-  height: calc(100% - 138px)
+  height: calc(100% - 138px);
 }
 #left-go > div {
   width: 20px;
@@ -138,6 +146,9 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%)
+}
+#left-go:hover {
+  border-right: 1px solid #EA0029
 }
 #left-go.go > div {
   background-color: #FFFFFF; /*shoutout to ie*/
@@ -153,6 +164,9 @@ h1 {
   line-height: 69px;
   letter-spacing: 4px
 }
+#bottom-go:hover {
+  border-top: 1px solid #EA0029
+}
 #bottom-go.go > div::before {
   content: ' ';
   background-color: #EA0029;
@@ -167,7 +181,7 @@ h1 {
   width: 69px;
   right: 0;
   top: 69px;
-  height: calc(100% - 138px)
+  height: calc(100% - 138px);
 }
 #right-go > div {
   line-height: 69px;
@@ -177,6 +191,9 @@ h1 {
   position: absolute;
   top: calc(50% - 100px);
   letter-spacing: 4px
+}
+#right-go:hover {
+  border-left: 1px solid #EA0029
 }
 #right-go.go > div::before {
   content: ' ';
@@ -192,8 +209,8 @@ h1 {
 
 .panel {
   position: relative;
-  width: calc(100% - 138px);
-  height: calc(100% - 138px);
+  width: calc(100% - 140px);
+  height: calc(100% - 140px);
   margin: 69px;
   border: 1px solid #EA0029;
   background-color: white
@@ -224,9 +241,14 @@ h1 {
   width: 50%;
   padding: 0
 }
+#right .subpanel #map {
+  width: calc(100% - 136px);
+  height: calc(100% - 136px);
+  margin: 68px
+}
 
 .cal-btn {
-  width: 212px;
+  width: 264px;
   border: 1px solid #EA0029;
   font-size: 20px;
   color: #EA0029;
@@ -237,12 +259,18 @@ h1 {
   padding-top: 16px;
   padding-bottom: 16px;
 }
+.cal-btn .addeventatc_dropdown span {
+  margin-top: 8px;
+  color: #333333;
+  font-weight: 200
+}
 #top .cal-btn {
   position: absolute;
   top: 70%;
   left: 50%;
   transform: translateX(-50%)
 }
+
 
 .countdown {
   position: absolute;
