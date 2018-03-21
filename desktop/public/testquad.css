@@ -25,7 +25,7 @@ h1 {
   left: 0;
   transition-property: top;
   transition-duration: .2s;
-  transition-delay: 0
+  transition-delay: 0s
 }
 .top.ready {
   top: -80%;
@@ -43,7 +43,7 @@ h1 {
   left: -100vw;
   transition-property: left;
   transition-duration: .2s;
-  transition-delay: 0;
+  transition-delay: 0s;
   color: #FFFFFF
 }
 .left.ready {
@@ -62,7 +62,7 @@ h1 {
   left: 0;
   transition-property: top;
   transition-duration: .2s;
-  transition-delay: 0
+  transition-delay: 0s
 }
 .bottom.ready {
   top: 80%;
@@ -80,19 +80,15 @@ h1 {
   left: 100vw;
   transition-property: left;
   transition-duration: .2s;
-  transition-delay: 0
+  transition-delay: 0s
 }
 .right.ready {
   left: 85vw;
-  z-index: 2
+  z-index: 2;
 }
 .right.go {
   left: 0;
   z-index: 1
-}
-
-.nudge-from-right {
-  left: -15vw
 }
 
 
@@ -147,9 +143,9 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%)
 }
-#left-go:hover {
+/* #left-go:hover {
   border-right: 1px solid #EA0029
-}
+} */
 #left-go.go > div {
   background-color: #FFFFFF; /*shoutout to ie*/
   background-color: initial
