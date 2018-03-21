@@ -453,3 +453,5 @@ function initMap() {
     title: '125 S Clark St'
   });
 }
+
+// document.querySelector('h1').innerText = window.innerHeight

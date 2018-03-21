@@ -415,3 +415,88 @@ h1 {
 .mce_inline_error {
   text-transform: uppercase
 }
+
+@media screen and (max-width: 1199px) {
+  #right .subpanel {
+    width: calc(100% - 136px);
+    height: calc(50% - 68px)
+  }
+  #right .subpanel + .subpanel {
+    width: 100%;
+    height: calc(50% + 68px)
+  }
+  #temperature {
+    right: 68px;
+    top: inherit;
+    bottom: calc(50% + 68px)
+  }
+  #right p {
+    top: 68px
+  }
+  .address {
+    top: inherit;
+    bottom: calc(50% + 68px)
+  }
+}
+@media screen and (max-width: 991px) {
+  #bottom .subpanel {
+    width: calc(100% - 228px);
+    height: 50%
+  }
+  #bottom p {
+    top: 25%;
+    transform: translateY(-50%)
+  }
+  .rsvp {
+    position: absolute;
+    width: calc(100% - 228px);
+    top: calc(75% - 28px)
+  }
+}
+@media screen and (max-width: 767px) {
+  #right .subpanel {
+    width: calc(100% - 68px);
+    padding-left: 34px;
+    padding-right: 34px;
+    height: calc(50% - 34px)
+  }
+  #right .subpanel + .subpanel {
+    height: calc(50% + 34px)
+  }
+  #right .subpanel #map {
+    width: calc(100% - 68px);
+    height: calc(100% - 68px);
+    margin: 34px
+  }
+  #temperature {
+    display: none
+  }
+  #right p {
+    max-width: calc(100% - 120px);
+    top: 34px;
+    font-size: 32px
+  }
+  .address {
+    bottom: calc(50% + 34px)
+  }
+
+  #bottom .subpanel {
+    width: calc(100% - 114px);
+    padding-left: 57px;
+    padding-right: 57px
+  }
+  .rsvp {
+    width: calc(100% - 114px)
+  }
+  .res-btn {
+    font-weight: 200
+  }
+
+  .countdown {
+    display: none
+  }
+  #top .cal-btn {
+    top: 50%;
+    transform: translate(-50%, -50%)
+  }
+}
