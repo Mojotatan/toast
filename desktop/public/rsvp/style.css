@@ -416,7 +416,7 @@ h1 {
   text-transform: uppercase
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 1120px) {
   #right .subpanel {
     width: calc(100% - 136px);
     height: calc(50% - 68px)
