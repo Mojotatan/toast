@@ -93,6 +93,10 @@ db.sync({force: true})
       res.sendFile(path.resolve(__dirname, './desktop/public/countdown.html'))
     })
 
+    .get('/scope', (req, res) => {
+      res.sendFile(path.resolve(__dirname, './desktop/public/lws/index.html'))
+    })
+
     .get('/mask', (req, res) => {
       res.sendFile(path.resolve(__dirname, './desktop/public/mask.html'))
     })

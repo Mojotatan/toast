@@ -17,78 +17,77 @@ h1 {
   /* font-weight:  */
 }
 
-.top {
+/* using both a transition and animation because I am a talentless hack */
+/* @keyframes zindex-back {
+  0% {z-index: 2}
+  100% {z-index: 1}
+} */
+.top, .left, .bottom, .right {
   position: absolute;
   width: 100vw;
   height: 100%;
-  top: -100%;
+  z-index: 0;
+  transition-duration: 0s, .2s;
+  transition-delay: .2s, 0s;
+}
+.top.ready, .left.ready, .bottom.ready, .right.ready {
+  z-index: 2;
+  transition-duration: 0s, .5s;
+  transition-delay: 0s, 0s
+}
+.top.go, .left.go, .bottom.go, .right.go {
+  z-index: 1;
+  transition-duration: 0s, .2s;
+  transition-delay: .2s, 0s
+}
+.top {
+  top: calc(-100% + 138px);
   left: 0;
-  transition-property: top;
-  transition-duration: .2s;
-  transition-delay: 0s
+  transition-property: z-index, top;
+  /* transition: z-index 0s ease .5s, top .2s ease 0s */
 }
 .top.ready {
-  top: -80%;
-  z-index: 2
+  top: calc(-100% + 138px + 138px)
 }
 .top.go {
   top: 0;
-  z-index: 1
 }
 .left {
-  position: absolute;
-  width: 100vw;
-  height: 100%;
   top: 0;
-  left: -100vw;
-  transition-property: left;
-  transition-duration: .2s;
-  transition-delay: 0s;
-  color: #FFFFFF
+  left: calc(-100vw + 138px);
+  color: #FFFFFF;
+  transition-property: z-index, left;
+  /* transition: z-index 0s ease .5s, left .2s ease 0s */
 }
 .left.ready {
-  left: -85vw;
-  z-index: 2
+  left: calc(-100vw + 138px + 138px)
 }
 .left.go {
   left: 0;
-  z-index: 1
 }
 .bottom {
-  position: absolute;
-  width: 100vw;
-  height: 100%;
-  top: 100%;
+  top: calc(100% - 138px);
   left: 0;
-  transition-property: top;
-  transition-duration: .2s;
-  transition-delay: 0s
+  transition-property: z-index, top;
+  /* transition: z-index 0s ease .5s, top .2s ease 0s */
 }
 .bottom.ready {
-  top: 80%;
-  z-index: 2
+  top: calc(100% - 138px - 138px)
 }
 .bottom.go {
   top: 0;
-  z-index: 1
 }
 .right {
-  position: absolute;
-  width: 100vw;
-  height: 100%;
   top: 0;
-  left: 100vw;
-  transition-property: left;
-  transition-duration: .2s;
-  transition-delay: 0s
+  left: calc(100vw - 138px);
+  transition-property: z-index, left;
+  /* transition: z-index 0s ease .5s, left .2s ease 0s */
 }
 .right.ready {
-  left: 85vw;
-  z-index: 2;
+  left: calc(100vw - 138px - 138px)
 }
 .right.go {
   left: 0;
-  z-index: 1
 }
 
 
@@ -106,13 +105,18 @@ h1 {
   top: 0;
   left: 69px;
   width: calc(100% - 138px);
+  transition-property: border-bottom;
+  transition-duration: 0s;
+  transition-delay: .2s;
+  border-bottom: 0px solid #EA0029
 }
 #top-go > div {
   line-height: 69px;
   letter-spacing: 4px
 }
 #top-go:hover {
-  border-bottom: 1px solid #EA0029
+  border-bottom: 1px solid #EA0029;
+  transition-delay: 0s
 }
 #top-go.go > div::before {
   content: ' ';
@@ -155,13 +159,18 @@ h1 {
   bottom: 0;
   width: calc(100% - 138px);
   left: 69px;
+  transition-property: border-top;
+  transition-duration: 0s;
+  transition-delay: .2s;
+  border-top: 0px solid #EA0029
 }
 #bottom-go > div {
   line-height: 69px;
   letter-spacing: 4px
 }
 #bottom-go:hover {
-  border-top: 1px solid #EA0029
+  border-top: 1px solid #EA0029;
+  transition-delay: 0s
 }
 #bottom-go.go > div::before {
   content: ' ';
@@ -178,6 +187,10 @@ h1 {
   right: 0;
   top: 69px;
   height: calc(100% - 138px);
+  transition-property: border-left;
+  transition-duration: 0s;
+  transition-delay: .2s;
+  border-left: 0px solid #EA0029
 }
 #right-go > div {
   line-height: 69px;
@@ -189,7 +202,8 @@ h1 {
   letter-spacing: 4px
 }
 #right-go:hover {
-  border-left: 1px solid #EA0029
+  border-left: 1px solid #EA0029;
+  transition-delay: 0s
 }
 #right-go.go > div::before {
   content: ' ';
