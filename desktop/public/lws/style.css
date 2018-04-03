@@ -14,6 +14,34 @@ body {
   top: calc(50% - 160px)
 }
 
+#see, #how, #he, #spins {
+  position: absolute;
+  font-size: 80px;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  transition: opacity 1s;
+  opacity: 0;
+}
+#see.vis, #how.vis, #he.vis, #spins.vis {
+  opacity: 1
+}
+#see {
+  left: calc(50% - 130px);
+  top: calc(50% - 300px)
+}
+#how {
+  left: calc(50% + 200px);
+  top: calc(50% - 160px)
+}
+#he {
+  left: calc(50% + 200px);
+  top: calc(50% + 80px)
+}
+#spins {
+  left: calc(50% - 130px);
+  top: calc(50% + 220px)
+}
+
 /* To "compile" this run the following js: */
 /* function giveMeStyles(deg) {
   console.log(`#scrope.r${deg} {transform: rotate(${deg}deg)}`)

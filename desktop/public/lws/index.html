@@ -2,55 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <link rel="stylesheet" href="/lws/style.css">
-  <!-- <style>
-    body {margin: 0}
-    .containment {position: absolute; width: 100%; height: 100vh}
-    #scrope {position: absolute; width: 260px; left: calc(50% - 130px); top: calc(50% - 160px)}
-    #scrope.r0 {
-      transform: rotate(0deg)
-    }
-    #scrope.r30 {
-      transform: rotate(30deg)
-    }
-    #scrope.r60 {
-      transform: rotate(60deg)
-    }
-    #scrope.r90 {
-      transform: rotate(90deg)
-    }
-    #scrope.r120 {
-      transform: rotate(120deg)
-    }
-    #scrope.r150 {
-      transform: rotate(150deg)
-    }
-    #scrope.r180 {
-      transform: rotate(180deg)
-    }
-    #scrope.r210 {
-      transform: rotate(210deg)
-    }
-    #scrope.r240 {
-      transform: rotate(240deg)
-    }
-    #scrope.r270 {
-      transform: rotate(270deg)
-    }
-    #scrope.r300 {
-      transform: rotate(300deg)
-    }
-    #scrope.r330 {
-      transform: rotate(330deg)
-    }
-  </style> -->
 </head>
 <body>
   <div class="containment">
     <img id="scrope" class="r0" src="/1318.jpg" />
+    <div id="see" class="vis">See</div>
+    <div id="how">How</div>
+    <div id="he">He</div>
+    <div id="spins">Spins</div>
   </div>
   <script>
     var didScroll = false
     var scrollDelta = 0
+    var scrope = document.getElementById('scrope')
+    var see = document.getElementById('see')
+    var how = document.getElementById('how')
+    var he = document.getElementById('he')
+    var spins = document.getElementById('spins')
+
     // window.onscroll = function() {
     //   didScroll = true
     // }
@@ -58,28 +27,20 @@
       didScroll = true;
       scrollDelta += e.deltaY / 10
     })
-    // setInterval(function() {
-    //   if (didScroll) {
-    //     let delta = (didScroll === 'up') ? 30 : -30
-    //     didScroll = false
-    //     let scrope = document.getElementById('scrope')
-    //     let angle = Number(scrope.className.slice(1))
-    //     angle += delta
-    //     if (angle < 0) angle += 360
-    //     else if (angle >= 360) angle -= 360
-    //     scrope.className = 'r' + angle
-    //   }
-    // }, 100)
+    
     setInterval(function() {
       if (didScroll) {
         didScroll = false
-        let scrope = document.getElementById('scrope')
         let angle = Number(scrope.className.slice(1))
         angle += scrollDelta
         scrollDelta = 0
         if (angle < 0) angle += 360
         else if (angle >= 360) angle -= 360
         scrope.className = 'r' + Math.round(angle)
+        see.className = (angle >= 270 || angle < 30) ? 'vis' : ''
+        how.className = (angle >= 30 && angle < 90) ? 'vis' : ''
+        he.className = (angle >= 90 && angle < 150) ? 'vis' : ''
+        spins.className = (angle >= 150 && angle < 270) ? 'vis' : ''
       }
     }, 100)
   </script>
