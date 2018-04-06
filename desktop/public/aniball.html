@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <style>
-      body {margin: 0}
+      body {margin: 0; background-color: #e8c547}
       .filler {
         width: 100%;
         font-size: 70px;
@@ -16,22 +16,29 @@
       }
 
       .containment {position: relative; width: 1200px; height: 800px; margin-left: auto; margin-right: auto; /*border: 3px solid black;*/ overflow: hidden}
+      /* .semi-containment {position: relative; width: 100%; height: 800px; margin-left: auto; margin-right: auto; overflow: hidden} */
+      .semi-containment {position: absolute; top: 50%; transform: translateY(-50%); width: 100%; height: 800px; margin-left: auto; margin-right: auto; /*border: 3px solid black;*/ overflow: hidden}
+
+      .text-dark {color: black}
+      .text-light {color: white}
+      .text-mid {color: #30323d}
 
       .ball {position: absolute; top: -40px; border-radius: 50%}
-      .blue {background-color: white; animation-duration: 2s; animation-timing-function: ease-in;}
-      .red {background-color: red; transform: translateY(-50%); animation-duration: 2s; animation-timing-function: ease-in-out}
+      .blue {background-color: #e8c547; animation-duration: 2s; animation-timing-function: ease-in;}
+      .red {background-color: #30323d; transform: translateY(-50%); animation-duration: 2s, 1s, 2s; animation-timing-function: ease-in-out}
       @keyframes blue-drop {
         0% {top: 0}
         /* 0% {transform: translateY(0)} */
 
-        50% {background-color: blue}
+        /* 50% {background-color: #b5b5b5} */
+        50% {background-color: white}
 
-        100% {top: calc(100% - 40px); background-color: white}
+        100% {top: calc(100% - 40px); background-color: #e8c547}
         /* 100% {transform: translateY(760px); background-color: white} */
       }
       @keyframes red-drop {
-        0% {top: 0; background-color: white}
-        100% {top: 50%; background-color: red;}
+        0% {top: 0; background-color: #e8c547}
+        100% {top: 50%; background-color: #30323d;}
       }
       @keyframes red-slide {
         0% {top: 50%}
@@ -44,24 +51,44 @@
       .ball.red.drop {animation-name: red-drop, red-slide, red-exist; animation-iteration-count: 1, 1, infinite}
       .ball.slide {top: 50%}
 
-      .ghost-text {position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%); transition-delay: 0s; transition-duration: 1s; transition-property: opacity; opacity: 0; font-size: 60px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right; width: 20%; color: red}
+      .ghost-text {position: absolute; top: 0; left: 0; transition-delay: 0s; transition-duration: .2s; transition-property: opacity; opacity: 0; font-size: 60px; font-family: serif; text-align: center; width: 100%; height: 100%}
       .ghost-text.summon {opacity: 1}
+
+      .slide-text > div {position: absolute; transition: left 1.5s, color 1.5s 3.5s; left: -282px}
+      .slide-text.go > div {left: 50%; color: #e8c547 !important}
+      .ghost-text > div {position: absolute; z-index: 1; /*font-family: Baskerville, serif*/}
+      #text1 {top: 50%; font-size: 160px; transform: translate(-50%, -88%)}
+      #text2 {top: 50%; font-size: 250px; transform: translate(-50%, -12%)}
+      #text3 {top: 25.2%; left: 43.93%; font-size: 232px}
+      #text4 {top: 52%; left: 44.93%; font-size: 89px}
+      #text5 {top: 63%; left: 44.93%; font-size: 99px}
+      /* #text3 {transform: translateX(-50%); left: 50%; font-size: 31pt}
+      #text4, #text5 {transform: translateX(-50%); left: 50%; font-size: 14pt} */
     </style>
   </head>
   <body>
-    <div class="filler">
+    <!-- <div class="filler">
       <div>I'm performance testing right now</div>
       <div>Scroll down to trigger the animation</div>
       <div></div>
+    </div> -->
+    <div class="semi-containment">
+      <div id="slide-text" class="slide-text">
+        <div id="text1" class="text-mid">OF THE</div>
+        <div id="text2" class="text-light">5,532</div>
+      </div>
+      <div class="ghost-text">
+        <div id="text3" class="text-mid">&nbsp;05%</div>
+        <div id="text4" class="text-light">MEET OUR</div>
+        <div id="text5" class="text-light">CRITERIA</div>
+      </div>
+      <div id="top" class="containment"></div>
     </div>
-    <div id="top" class="containment">
-      <div class="ghost-text">Durdle Durr</div>
-    </div>
-    <div class="filler"><div></div></div>
+    <!-- <div class="filler"><div></div></div> -->
     <script type="text/javascript">
       function setUp() {
         let top = document.getElementById('top')
-        const balls = 1000
+        const balls = 1200
         // let delayArray = []
         // for (let i = 0; i < balls; i++) {
         //   delayArray.push(Math.floor(Math.random() * 1000) * 2.5)
@@ -72,7 +99,8 @@
           newBall.className = (i % 10 === 0) ? 'ball red' : 'ball blue'
           // newBall.className = 'ball blue'
           let delay = Math.floor(Math.random() * 2000)
-          newBall.style.animationDelay = `${delay}ms, 4s, 6s`
+          newBall.style.animationDelay = `${delay}ms, 4s, 5s`
+          // newBall.style.animationDelay = `${delay + 2000}ms, 6s, 8s`
           // newBall.style.transitionDelay = `${delay}ms`
           let diameter = Math.floor(Math.random() * 4) * 5 + 10
           newBall.style.width = `${diameter}px`
@@ -83,42 +111,52 @@
         }
       }
       setUp()
-      const getYOffset = element => {
-        let y = element.offsetTop
-        if (element.offsetParent) y += getYOffset(element.offsetParent)
-        return y
-      }
-      var scrollTarget = getYOffset(document.getElementById('top')) - 800
-      var didScroll = false
-      window.onscroll = function() {
-        didScroll = true
-      }
-      var checkYOffset = setInterval(function() {
-        if (didScroll) {
-          didScroll = false
-          console.log('happy scroll')
-          if (window.scrollY >= scrollTarget) {
+      // const getYOffset = element => {
+      //   let y = element.offsetTop
+      //   if (element.offsetParent) y += getYOffset(element.offsetParent)
+      //   return y
+      // }
+      // var scrollTarget = getYOffset(document.getElementById('top')) - 800
+      // var didScroll = false
+      // window.onscroll = function() {
+      //   didScroll = true
+      // }
+      // var checkYOffset = setInterval(function() {
+      //   if (didScroll) {
+      //     didScroll = false
+          // console.log('happy scroll')
+          // if (window.scrollY >= scrollTarget) {
+
+            window.onload = function() {
             console.log('trigger me timbers')
-            let balls = document.getElementsByClassName('ball')
-            Array.from(balls).forEach(ball => {
-              ball.className += ' drop'
-            })
+            let slider = document.getElementById('slide-text')
+            slider.className += ' go'
             setTimeout(function() {
-              let balls = document.getElementsByClassName('red')
+              let balls = document.getElementsByClassName('ball')
               Array.from(balls).forEach(ball => {
-                ball.className += ' slide'
+                ball.className += ' drop'
               })
               setTimeout(function() {
-                let ghosts = document.getElementsByClassName('ghost-text')
-                Array.from(ghosts).forEach(ghost => {
-                  ghost.className += ' summon'
+                let balls = document.getElementsByClassName('red')
+                Array.from(balls).forEach(ball => {
+                  ball.className += ' slide'
                 })
-              }, 5000)
-            }, 2000)
-            clearInterval(checkYOffset)
-          }
-        }
-      }, 100)
+                setTimeout(function() {
+                  let ghosts = document.getElementsByClassName('ghost-text')
+                  Array.from(ghosts).forEach(ghost => {
+                    ghost.className += ' summon'
+                  })
+                }, 4000)
+              }, 2000)
+            }, 2500)
+            }
+            // clearInterval(checkYOffset)
+          // }
+        // }
+      // }, 100)
+
+
+
       // window.onload = function() {
       //   let balls = document.getElementsByClassName('ball')
       //   Array.from(balls).forEach(ball => {
