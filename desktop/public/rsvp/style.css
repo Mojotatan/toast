@@ -17,11 +17,35 @@ h1 {
   /* font-weight:  */
 }
 
-/* using both a transition and animation because I am a talentless hack */
-/* @keyframes zindex-back {
-  0% {z-index: 2}
-  100% {z-index: 1}
-} */
+#secret-static {
+  position: fixed;
+  z-index: 4;
+  background-image: url(http://10.13.2.7:1337/rsvp/images/static.gif);
+  /* background-image: url(https://media.giphy.com/media/kNT9ucxJC0WFG/giphy.gif); */
+  background-size: cover;
+  left: 69px;
+  top: 69px;
+  width: calc(100% - 138px);
+  height: calc(100% - 138px)
+}
+
+.push-down .panel, .push-right .panel, .push-up .panel, .push-left .panel {
+  transition-duration: .5s, .5s
+}
+.push-down .panel {
+  top: 138px !important
+}
+.push-right .panel {
+  left: 138px !important
+}
+.push-up .panel {
+  top: -138px !important
+}
+.push-left .panel {
+  left: -138px !important
+}
+
+
 .top, .left, .bottom, .right {
   position: absolute;
   width: 100vw;
@@ -219,6 +243,10 @@ h1 {
 
 .panel {
   position: relative;
+  transition-property: top, left;
+  transition-duration: .2s, .2s;
+  top: 0;
+  left: 0;
   width: calc(100% - 140px);
   height: calc(100% - 140px);
   margin: 69px;

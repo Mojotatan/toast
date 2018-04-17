@@ -13,36 +13,60 @@ let navInit = () => {
 
   topGo.onmouseover = e => {
     if (topGo.className !== 'go') top.className = 'top ready'
+    if (leftGo.className === 'go') left.className = 'left go push-down'
+    if (rightGo.className === 'go') right.className = 'right go push-down'
+    if (bottomGo.className === 'go') bottom.className = 'bottom go push-down'
   }
 
   leftGo.onmouseover = e => {
     if (leftGo.className !== 'go') left.className = 'left ready'
+    if (topGo.className === 'go') top.className = 'top go push-right'
+    if (rightGo.className === 'go') right.className = 'right go push-right'
+    if (bottomGo.className === 'go') bottom.className = 'bottom go push-right'
   }
 
   bottomGo.onmouseover = e => {
     if (bottomGo.className !== 'go') bottom.className = 'bottom ready'
+    if (leftGo.className === 'go') left.className = 'left go push-up'
+    if (rightGo.className === 'go') right.className = 'right go push-up'
+    if (topGo.className === 'go') top.className = 'top go push-up'
   }
 
   rightGo.onmouseover = e => {
     if (rightGo.className !== 'go') right.className = 'right ready'
+    if (leftGo.className === 'go') left.className = 'left go push-left'
+    if (topGo.className === 'go') top.className = 'top go push-left'
+    if (bottomGo.className === 'go') bottom.className = 'bottom go push-left'
   }
 
   // on mouseleave
 
   topGo.onmouseleave = e => {
     if (topGo.className !== 'go') top.className = 'top'
+    if (leftGo.className === 'go') left.className = 'left go'
+    if (rightGo.className === 'go') right.className = 'right go'
+    if (bottomGo.className === 'go') bottom.className = 'bottom go'
   }
 
   leftGo.onmouseleave = e => {
     if (leftGo.className !== 'go') left.className = 'left'
+    if (topGo.className === 'go') top.className = 'top go'
+    if (rightGo.className === 'go') right.className = 'right go'
+    if (bottomGo.className === 'go') bottom.className = 'bottom go'
   }
 
   bottomGo.onmouseleave = e => {
     if (bottomGo.className !== 'go') bottom.className = 'bottom'
+    if (leftGo.className === 'go') left.className = 'left go'
+    if (rightGo.className === 'go') right.className = 'right go'
+    if (topGo.className === 'go') top.className = 'top go'
   }
 
   rightGo.onmouseleave = e => {
     if (rightGo.className !== 'go') right.className = 'right'
+    if (leftGo.className === 'go') left.className = 'left go'
+    if (topGo.className === 'go') top.className = 'top go'
+    if (bottomGo.className === 'go') bottom.className = 'bottom go'
   }
 
   // on click
@@ -95,6 +119,10 @@ let navInit = () => {
     rightGo.className = 'go'
   }
 
+  var boop = document.getElementById('boop')
+  boop.onclick = e => {
+    if (boop.parentNode.className === 'go') document.getElementById('secret-static').hidden = false
+  }
 }
 navInit()
 

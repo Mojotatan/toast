@@ -78,7 +78,7 @@ export default class Connect4 extends React.Component {
 
   componentWillUpdate(e) {
     let win = this.state.board.victoryCheck()
-    if (win) console.log(win)
+    if (win) console.log(`${win} wins`)
   }
 
   render() {
