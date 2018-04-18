@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style>
+      body {margin: 0}
+      .containment {position: relative; width: 100%; height: 100vh; overflow: hidden}
+      .card-container {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 343px; height: 455px}
+      .card-container > * {position: absolute; width: 100%; height: 100%;
+        transition-property: z-index, transform;
+        transition-duration: 0s, .5s;
+        transition-delay: .25s, 0s;
+        transition-timing-function: linear, linear;
+        transform: rotateY(0deg)
+      }
+      #card {z-index: 1}
+      .flipped #card {z-index: 0; transform: rotateY(180deg)}
+      #bio {z-index: 0; transform: rotateY(180deg); color: white; background-color: black; font-size: 64px; }
+      .flipped #bio {z-index: 1; transform: rotateY(0deg)}
+    </style>
+  </head>
+  <body>
+    <div id="top" class="containment">
+      <div id="trigger" class="card-container">
+        <img id="card" src="images/gud.jpg" />
+        <div id="bio">james is a pretty cool guy who doesn't afraid of anything</div>
+      </div>
+    </div>
+    <script>
+      function flipIt() {
+        let trig = document.getElementById('trigger')
+        trig.onclick = e => {
+          trig.className = (trig.className === 'card-container') ? 'card-container flipped' : 'card-container'
+        }
+      }
+      flipIt()
+    </script>
+  </body>
+</html>
