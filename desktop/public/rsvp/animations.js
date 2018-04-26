@@ -127,7 +127,7 @@ let navInit = () => {
 navInit()
 
 let timeInit = () => {
-  var date = new Date('April 12, 2018 18:00:00').getTime()
+  var date = new Date('May 17, 2018 18:00:00').getTime()
   var weeks = document.getElementById('weeks')
   var days = document.getElementById('days')
   var hours = document.getElementById('hours')

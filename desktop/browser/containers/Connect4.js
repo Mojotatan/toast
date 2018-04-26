@@ -84,12 +84,11 @@ export default class Connect4 extends React.Component {
   render() {
     return (
       <div>
-        <div className={styles.header}></div>
         <div className={styles.board}>
           {this.state.board.getColumns().map((col, index) => (
             <div id={`${index}`} key={index} className={styles.floatCol} onClick={this.handleMove}>
               {col.map(slot => (
-                <div id={`${index}`} key={`${slot.x}-${slot.y}`} className={styles.slot}>
+                <div id={`${index}`} key={`${slot.x}-${slot.y}`} className={(slot.color === 'white') ? styles.slot : `${styles.slot} ${styles.drop}`}>
                   <div id={`${index}`} className={styles[slot.color]}></div>
                 </div>
               ))}

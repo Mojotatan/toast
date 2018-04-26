@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <style>
+      .centered {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)}
+      .button {
+        position: relative;
+        height: 50px;
+        width: 100px;
+        text-align: center;
+        line-height: 50px;
+        background-color: #bbb
+      }
+      .button > span {
+        background-color: black;
+        transition-duration: .1s;
+        position: absolute;
+        /* transition-timing-function: linear */
+      }
+      .l1, .l3 {
+        width: 0;
+        height: 2px;
+        transition-property: width
+      }
+      .l2, .l4 {
+        width: 2px;
+        height: 0;
+        transition-property: height
+      }
+      .l1 {
+        top: 0;
+        left: 0;
+        transition-delay: .3s
+      }
+      .l2 {
+        right: 0;
+        top: 0;
+        transition-delay: .2s
+      }
+      .l3 {
+        bottom: 0;
+        right: 0;
+        transition-delay: .1s
+      }
+      .l4 {
+        left: 0;
+        bottom: 0;
+        transition-delay: 0s
+      }
+      .button:hover .l1, .button:hover .l3 {
+        width: 100px;
+        height: 2px;
+      }
+      .button:hover .l2, .button:hover .l4 {
+        width: 2px;
+        height: 50px;
+      }
+      .button:hover .l1 {
+        transition-delay: 0s
+      }
+      .button:hover .l2 {
+        transition-delay: .1s
+      }
+      .button:hover .l3 {
+        transition-delay: .2s
+      }
+      .button:hover .l4 {
+        transition-delay: .3s
+      }
+    </style>
+  </head>
+  <body>
+    <div class="centered">
+      <div class="button">ES99
+        <span class="l1"></span>
+        <span class="l2"></span>
+        <span class="l3"></span>
+        <span class="l4"></span>
+      </div>
+    </div>
+  </body>
+</html>
