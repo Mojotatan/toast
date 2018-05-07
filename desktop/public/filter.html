@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .steve {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        /* filter: url(sweet.svg#orange) */
+      }
+      .filter {
+        /* filter: sepia(); */
+        filter: url("sweet.svg#pheelter");
+        /* opacity: 0.5 */
+      }
+      .orange {
+        background-color: rgba(243, 159, 119, 1)
+      }
+    </style>
+  </head>
+  <body class="orange">
+    <div class="steve">
+      <!-- <div class="filter orange"></div> -->
+      <img class="filter" src="smile.jpeg" />
+    </div>
+  </body>
+</html>
