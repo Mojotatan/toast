@@ -1,4 +1,4 @@
-let navInit = () => {
+let navInit = function() {
   var top = document.getElementById('top')
   var left = document.getElementById('left')
   var bottom = document.getElementById('bottom')
@@ -11,28 +11,28 @@ let navInit = () => {
 
   // on mouseover
 
-  topGo.onmouseover = e => {
+  topGo.onmouseover = function() {
     if (topGo.className !== 'go') top.className = 'top ready'
     if (leftGo.className === 'go') left.className = 'left go push-down'
     if (rightGo.className === 'go') right.className = 'right go push-down'
     if (bottomGo.className === 'go') bottom.className = 'bottom go push-down'
   }
 
-  leftGo.onmouseover = e => {
+  leftGo.onmouseover = function() {
     if (leftGo.className !== 'go') left.className = 'left ready'
     if (topGo.className === 'go') top.className = 'top go push-right'
     if (rightGo.className === 'go') right.className = 'right go push-right'
     if (bottomGo.className === 'go') bottom.className = 'bottom go push-right'
   }
 
-  bottomGo.onmouseover = e => {
+  bottomGo.onmouseover = function() {
     if (bottomGo.className !== 'go') bottom.className = 'bottom ready'
     if (leftGo.className === 'go') left.className = 'left go push-up'
     if (rightGo.className === 'go') right.className = 'right go push-up'
     if (topGo.className === 'go') top.className = 'top go push-up'
   }
 
-  rightGo.onmouseover = e => {
+  rightGo.onmouseover = function() {
     if (rightGo.className !== 'go') right.className = 'right ready'
     if (leftGo.className === 'go') left.className = 'left go push-left'
     if (topGo.className === 'go') top.className = 'top go push-left'
@@ -41,28 +41,28 @@ let navInit = () => {
 
   // on mouseleave
 
-  topGo.onmouseleave = e => {
+  topGo.onmouseleave = function() {
     if (topGo.className !== 'go') top.className = 'top'
     if (leftGo.className === 'go') left.className = 'left go'
     if (rightGo.className === 'go') right.className = 'right go'
     if (bottomGo.className === 'go') bottom.className = 'bottom go'
   }
 
-  leftGo.onmouseleave = e => {
+  leftGo.onmouseleave = function() {
     if (leftGo.className !== 'go') left.className = 'left'
     if (topGo.className === 'go') top.className = 'top go'
     if (rightGo.className === 'go') right.className = 'right go'
     if (bottomGo.className === 'go') bottom.className = 'bottom go'
   }
 
-  bottomGo.onmouseleave = e => {
+  bottomGo.onmouseleave = function() {
     if (bottomGo.className !== 'go') bottom.className = 'bottom'
     if (leftGo.className === 'go') left.className = 'left go'
     if (rightGo.className === 'go') right.className = 'right go'
     if (topGo.className === 'go') top.className = 'top go'
   }
 
-  rightGo.onmouseleave = e => {
+  rightGo.onmouseleave = function() {
     if (rightGo.className !== 'go') right.className = 'right'
     if (leftGo.className === 'go') left.className = 'left go'
     if (topGo.className === 'go') top.className = 'top go'
@@ -71,7 +71,7 @@ let navInit = () => {
 
   // on click
   
-  topGo.onclick = e => {
+  topGo.onclick = function() {
     top.className = 'top go'
     left.className = 'left'
     bottom.className = 'bottom'
@@ -83,7 +83,7 @@ let navInit = () => {
     rightGo.className = ''
   }
 
-  leftGo.onclick = e => {
+  leftGo.onclick = function() {
     top.className = 'top'
     left.className = 'left go'
     bottom.className = 'bottom'
@@ -95,7 +95,7 @@ let navInit = () => {
     rightGo.className = ''
   }
 
-  bottomGo.onclick = e => {
+  bottomGo.onclick = function() {
     top.className = 'top'
     left.className = 'left'
     bottom.className = 'bottom go'
@@ -107,7 +107,7 @@ let navInit = () => {
     rightGo.className = ''
   }
 
-  rightGo.onclick = e => {
+  rightGo.onclick = function() {
     top.className = 'top'
     left.className = 'left'
     bottom.className = 'bottom'
@@ -120,14 +120,17 @@ let navInit = () => {
   }
 
   var boop = document.getElementById('boop')
-  boop.onclick = e => {
-    if (boop.parentNode.className === 'go') document.getElementById('secret-static').hidden = false
+  boop.onclick = function() {
+    if (boop.parentNode.className === 'go') {
+      document.getElementById('secret-static').hidden = false
+      document.getElementById('video').play()
+    }
   }
 }
 navInit()
 
-let timeInit = () => {
-  var date = new Date('May 17, 2018 18:00:00').getTime()
+let timeInit = function() {
+  var date = new Date('June 7, 2018 18:00:00').getTime()
   var weeks = document.getElementById('weeks')
   var days = document.getElementById('days')
   var hours = document.getElementById('hours')
@@ -141,7 +144,7 @@ let timeInit = () => {
     var dif = date - now
     
     weeks.innerText = addLeadingZero(Math.floor(dif / (1000 * 60 * 60 * 24 * 7)))
-    days.innerText = addLeadingZero(Math.floor(dif / (1000 * 60 * 60 * 24)))
+    days.innerText = addLeadingZero(Math.floor((dif % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24)))
     hours.innerText = addLeadingZero(Math.floor((dif % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))
     minutes.innerText = addLeadingZero(Math.floor((dif % (1000 * 60 * 60)) / (1000 * 60)))
     seconds.innerText = addLeadingZero(Math.floor((dif % (1000 * 60)) / 1000))
@@ -151,7 +154,7 @@ let timeInit = () => {
 }
 timeInit()
 
-let formInit = () => {
+let formInit = function() {
   var name = document.getElementById('mce-NAME')
   var company = document.getElementById('mce-EMAIL')
   var email = document.getElementById('mce-COMPANY')
@@ -159,7 +162,7 @@ let formInit = () => {
   var disable = document.getElementById('disable')
   var enable = document.getElementById('enable')
   
-  let onChange = e => {
+  let onChange = function() {
     if (name.value && company.value && email.value) {
       disable.hidden = true
       enable.hidden = false
@@ -176,10 +179,10 @@ let formInit = () => {
   var yes = document.getElementById('mce-ATTENDING-0')
   var no = document.getElementById('mce-ATTENDING-1')
 
-  document.querySelector('.res-btn.yes').onclick = e => {
+  document.querySelector('.res-btn.yes').onclick = function() {
     yes.checked = true
   }
-  document.querySelector('.res-btn.no').onclick = e => {
+  document.querySelector('.res-btn.no').onclick = function() {
     no.checked = true
   }
 }
@@ -191,8 +194,9 @@ function tempInit() {
   xhttp.send()
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      console.log(JSON.parse(this.responseText))
-      document.getElementById('temperature').innerText = Math.round((JSON.parse(this.responseText).main.temp - 273.15) * 9/5 + 32) + '˚'
+      // console.log(JSON.parse(this.responseText))
+      let temp = document.getElementById('temperature')
+      temp.innerHTML = Math.round((JSON.parse(this.responseText).main.temp - 273.15) * 9/5 + 32) + temp.innerHTML
    }
 };
 }
@@ -483,3 +487,19 @@ function initMap() {
 }
 
 // document.querySelector('h1').innerText = window.innerHeight
+var moved = false
+document.onclick = function() {moved = true}
+window.setTimeout(function(){
+  if (!moved) {
+    document.getElementById('top').className = 'top go'
+    document.getElementById('left').className = 'left'
+    document.getElementById('bottom').className = 'bottom'
+    document.getElementById('right').className = 'right'
+
+    document.getElementById('top-go').className = 'go'
+    document.getElementById('left-go').className = ''
+    document.getElementById('bottom-go').className = ''
+    document.getElementById('right-go').className = ''
+  }
+  document.onclick = null
+}, 8000)

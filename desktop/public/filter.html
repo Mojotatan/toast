@@ -9,19 +9,29 @@
         /* filter: url(sweet.svg#orange) */
       }
       .filter {
-        /* filter: sepia(); */
-        filter: url("sweet.svg#pheelter");
-        /* opacity: 0.5 */
+        /* filter: url("sweet.svg#pheelter"); */
+        transition-property: filter;
+        transition-duration: .5s
       }
+      .tang {filter: url("sweet.svg#pheelter")}
+      .red {filter: url("sweet.svg#red")}
+      .green {filter: url("sweet.svg#green")}
+      .blue {filter: url("sweet.svg#blue")}
       .orange {
-        background-color: rgba(243, 159, 119, 1)
+        /* background-color: rgba(243, 159, 119, 1) */
       }
     </style>
   </head>
   <body class="orange">
     <div class="steve">
       <!-- <div class="filter orange"></div> -->
-      <img class="filter" src="smile.jpeg" />
+      <img id="img" class="filter tang" src="smile.jpeg" />
     </div>
+    <!-- <script>
+      let bob = document.getElementById('img')
+      bob.onclick = e => {
+        bob.className = "filter green"
+      }
+    </script> -->
   </body>
 </html>

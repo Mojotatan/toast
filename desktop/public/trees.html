@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {height: 110vh}
+    </style>
+  </head>
+  <body>
+    <img id="zoom" style="width:20px;height:auto"src="images/547.jpg" />
+    <script>
+      document.onscroll = e => {
+        e.preventDefault()
+        let zoom = document.getElementById('zoom')
+        zoom.style.width = Number(zoom.style.width.slice(0, -2)) + 2 + 'px'
+      }
+    </script>
+  </body>
+</html>
