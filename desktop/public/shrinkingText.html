@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+        background-color: #373737
+      }
+      .container {
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        transform: translateX(-50%)
+      }
+      .namebox {
+        width: 600px;
+        background-color: burlywood;
+        overflow: hidden
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="namebox"><span class="nametext">Yolo</span></div>
+      <div class="namebox"><span class="nametext">Swaggins</span></div>
+    </div>
+    <script>
+      Array.from(document.querySelectorAll('.namebox')).forEach(box => {
+        let name = box.querySelector('.nametext')
+        name.style.fontSize = '0px'
+        while (name.offsetWidth <= box.offsetWidth) {
+          name.style.fontSize = `${Number(name.style.fontSize.slice(0, -2)) + 1}px`
+        }
+        // rollback fontSize by one
+        name.style.fontSize = `${Number(name.style.fontSize.slice(0, -2)) - 1}px`
+      })
+    </script>
+  </body>
+</html>

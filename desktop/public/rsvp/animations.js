@@ -156,6 +156,8 @@ timeInit()
 
 let formInit = function() {
   var name = document.getElementById('mce-NAME')
+  var first = document.getElementById('mce-FIRST')
+  var last = document.getElementById('mce-LAST')
   var company = document.getElementById('mce-EMAIL')
   var email = document.getElementById('mce-COMPANY')
 
@@ -163,6 +165,7 @@ let formInit = function() {
   var enable = document.getElementById('enable')
   
   let onChange = function() {
+    if (first.value && last.value) name.value = first.value + ' ' + last.value
     if (name.value && company.value && email.value) {
       disable.hidden = true
       enable.hidden = false
