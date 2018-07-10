@@ -1,0 +1,33 @@
+.board {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 810px;
+  height: 810px
+}
+
+.board > div {
+  /* display: inline-block; */
+  float: left;
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border: 1px solid black;
+  font-family: sans-serif;
+  font-size: 20px;
+  color: black;
+  text-align: center;
+  cursor: pointer
+}
+.board > div > div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fill {
+  background-color: red;
+  color: white !important
+}

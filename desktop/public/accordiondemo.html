@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <style>
+      .accordion {
+        transition-property: height;
+        transition-duration: .25s;
+        overflow-y: hidden
+      }
+      .accordion .controller {
+        cursor: pointer
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Give each accordion a class of "accordion" (you can give it other classes, too) -->
+    <div class="accordion parent">
+      <!-- And put a child element at the top with the class "controller" (it can be any element but make sure it has no top margin) -->
+      <div class="controller">Expand ></div>
+      <p>Swag</p>
+      <p>Swag</p>
+      <p>Caillou</p>
+      <p>Swag</p>
+    </div>
+    <div class="accordion parent">
+      <!-- And put a child element at the top with the class "controller" (it can be any element but make sure it has no top margin) -->
+      <div class="controller">Expand ></div>
+      <div class="accordion">
+        <!-- And put a child element at the top with the class "controller" (it can be any element but make sure it has no top margin) -->
+        <div class="controller">Expand ></div>
+        <p>Swag</p>
+        <p>Swag</p>
+        <p>Caillou</p>
+        <p>Swag</p>
+      </div>
+      <p>Swag</p>
+      <p>Swag</p>
+      <p>Caillou</p>
+      <p>Swag</p>
+    </div>
+    <div class="accordion parent">
+      <!-- And put a child element at the top with the class "controller" (it can be any element but make sure it has no top margin) -->
+      <div class="controller">Expand ></div>
+      <div class="accordion">
+        <div class="controller">Expand ></div>        
+        <p>Swag</p>
+        <p>Swag</p>
+        <p>Caillou</p>
+        <p>Swag</p>
+      </div>
+    </div>
+    <script>
+      Array.prototype.forEach.call(document.querySelectorAll('.accordion.parent'), function(accordion) {
+        Array.prototype.forEach.call(accordion.querySelectorAll('.accordion'), function(child) {
+          let comptroller = child.querySelector('.controller')
+
+          let childMaxHeight = child.offsetHeight + 'px'
+          let childBaseHeight = comptroller.offsetHeight + 'px'
+          child.style.height = childBaseHeight
+
+          comptroller.onclick = function() {
+            if (child.style.height === childBaseHeight) {
+              child.style.height = childMaxHeight
+              comptroller.innerHTML = '< Contract'
+              accordion.style.height = Number(accordion.style.height.slice(0, -2)) + Number(childMaxHeight.slice(0, -2)) + 'px'
+            } else {
+              child.style.height = childBaseHeight
+              comptroller.innerHTML = 'Expand >'
+              accordion.style.height = Number(accordion.style.height.slice(0, -2)) - Number(childMaxHeight.slice(0, -2)) + 'px'
+            }
+          }
+        })
+
+        let controller = accordion.querySelector('.controller')
+
+        let maxHeight = accordion.offsetHeight + 'px'
+        let baseHeight = controller.offsetHeight + 'px'
+        accordion.style.height = baseHeight
+
+        controller.onclick = function() {
+          if (accordion.style.height === baseHeight) {
+            Array.prototype.forEach.call(document.querySelectorAll('.accordion'), function(otherAccordion) {
+              otherAccordion.style.height = baseHeight
+              otherAccordion.querySelector('.controller').innerHTML = 'Expand >'
+            })
+            accordion.style.height = maxHeight
+            controller.innerHTML = '< Contract'
+          } else {
+            accordion.style.height = baseHeight
+            controller.innerHTML = 'Expand >'
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

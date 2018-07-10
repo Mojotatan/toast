@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const path = require('path')
+const fs = require('fs')
 
 const {readTheDictionary, rng} = require('./util')
 let dictionary = readTheDictionary()
@@ -99,6 +100,14 @@ db.sync({force: true})
 
     .get('/mask', (req, res) => {
       res.sendFile(path.resolve(__dirname, './desktop/public/mask.html'))
+    })
+
+    .get('/pdf', (req, res) => {
+      let pdf = require('./pdf.js').create()
+      pdf.on('finish', () => {
+        // res.download(path.resolve(__dirname, './temp.pdf'))
+        res.sendFile(path.resolve(__dirname, './temp.pdf'))
+      })
     })
 
     .get('*', (req, res) => {

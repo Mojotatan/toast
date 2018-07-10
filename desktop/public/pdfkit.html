@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <script src="pdfkit.js"></script>
+    <script src="blob-stream.js"></script>
+  </head>
+  <body>
+    <script>
+      let doc = new PDFDocument({autoFirstPage: false})
+      stream = doc.pipe(blobStream())
+
+      doc.addPage({
+        margin: 15
+      })
+      doc.info.Title = 'Title'
+      doc.info.Author = 'Vonberg'
+
+      // doc.image(path.resolve(__dirname, './pdf-imgs/vvi-logo.png'), 10, 10, {
+      //   height: 60
+      // })
+
+      doc.text('Title', 0, 35, {
+        align: 'center'
+      })
+
+      // console.log(doc)
+      const docWidth = 612
+      const docHeight = 792
+
+      // default line height for 12px font is 14.4, rounding up to 15
+      doc.fillColor('#00703c')
+      doc.text('Category', 0, 15, {
+        align: 'right'
+      })
+      doc.text('INLINE?', 0, 30, {
+        align: 'right'
+      })
+      doc.fillColor('#000000')
+      doc.text('Series', 0, 45, {
+        align: 'right'
+      })
+      doc.text('slip-in cartridge?', 0, 60, {
+        align: 'right'
+      })
+
+      doc.rect(15, 75, docWidth - 30, 2).fillAndStroke('#00703c')
+      
+      let colWidth = (docWidth - 30) / 2 - 15
+      // colWidth = (docWidth - 30) / 3 - 15
+
+      doc.rect(colWidth + 30, 90, 2, 500).fillAndStroke('#00703c')
+
+
+      // column 1
+
+      doc.fillColor('#000000')
+      doc.text('PRODUCT', 15, 90)
+      doc.rect(15, 105, colWidth, 1).fillAndStroke('#00703c')
+      // product image
+
+      doc.fillColor('#000000')
+      doc.text('SCHEMATIC', 15, 90 + colWidth)
+      doc.rect(15, 105 + colWidth, colWidth, 1).fillAndStroke('#00703c')
+      // schematic image
+
+      doc.fillColor('#000000')
+      doc.text('Product', 15, 90 + colWidth + 100)
+      doc.rect(15, 105 + colWidth + 100, colWidth, 1).fillAndStroke('#00703c')
+      // performance image
+
+      // column 2
+      doc.fillColor('#000000')
+      doc.text('DESCRIPTION', colWidth + 45, 90)
+      doc.rect(colWidth + 45, 105, colWidth, 1).fillAndStroke('#00703c')
+
+      doc.fillColor('#000000')
+      doc.text('OPERATION', colWidth + 45, 120)
+      doc.rect(colWidth + 45, 135, colWidth, 1).fillAndStroke('#00703c')
+
+      doc.fillColor('#000000')
+      doc.text('FEATURES', colWidth + 45, 150)
+      doc.rect(colWidth + 45, 165, colWidth, 1).fillAndStroke('#00703c')
+
+      doc.fillColor('#000000')
+      doc.text('SPECIFICATIONS', colWidth + 45, 180)
+      doc.rect(colWidth + 45, 195, colWidth, 1).fillAndStroke('#00703c')
+
+      doc.fillColor('#000000')
+      doc.text('ORDERING INFORMATION', colWidth + 45, 210)
+      doc.rect(colWidth + 45, 225, colWidth, 1).fillAndStroke('#00703c')
+      //  ordering info image
+
+      // bottom column
+
+
+      doc.fillColor('#000000')
+      doc.fontSize(6)
+      doc.text(
+        "This document, as well as all catalogs, price lists and information provided by Vonberg Valve, Inc., is intended to provide product information for further consideration by users having substantial technical expertise due to the variety of operating conditions and applications for these valves, the user, through its own analysis, testing and evaluation, is solely responsible for making the final selection of the products and ensuring that all safety, warning and performance requirements of the application or use are met. The valves described herein, including without limitation, all component features, specifications, designs, pricing and availability, are subject to change at any time at the sole discretion of Vonberg Valve, Inc. without prior notification.",
+        15, docHeight - 90
+      )
+
+      // footer
+      doc.rect(15, docHeight - 55, docWidth - 30, 2).fillAndStroke('#00703c')
+
+      // doc.fontSize(18)
+      // doc.text(
+      //   'Vonberg Valve, inc.',
+      //   15, docHeight - 45
+      // )
+
+      doc.fillColor('#000000')
+      doc.fontSize(8)
+      doc.text(
+        '3800 Industrial Avengue • Rolling Meadows, IL 60008-1085 USA © 2015',
+        0, docHeight - 45, {align: 'center'}
+      )
+      doc.text(
+        'phone: 847-259-3800 • fax: 847-259-3997 • email: info@vonberg.com',
+        0, docHeight - 30, {align: 'center'}
+      )
+      
+      doc.end()
+      stream.on('finish', () => {
+        blob = stream.toBlob('application/pdf')
+        // let temp = new File([blob], 'alfred.pdf', {type: 'application/pdf'})
+        let a = document.createElement('a')
+        let url = URL.createObjectURL(blob)
+        a.href = url
+        a.download = 'alfred.pdf'
+        document.body.appendChild(a)
+        a.click()
+        setTimeout(() => {
+          document.body.removeChild(a)
+          window.URL.revokeObjectURL(url)
+          window.close()
+        }, 0)
+      })
+
+    </script>
+  </body>
+</html>

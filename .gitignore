@@ -3,3 +3,5 @@ node_modules/*
 .DS_Store
 
 desktop/public/bundle.js
+
+temp.pdf
